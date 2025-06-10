@@ -21,16 +21,23 @@
             <a href="glass.php" target="_self">
                 <button>Glass Maker</button>
             </a>
-            <center><h2>HUB</h2></center>
-            <a href="sanitation.php">
-                <button>Sanitation</button>
-            </a>
+            <h2>HUB</h2>
+            <h3 id="account">
+                <?php
+                    echo "<p>{$_SESSION['username']}</p>"
+                ?>
+                <a href="accountPage.php">
+                    <!-- <img src=".\images\userIcon" width="12.5%"> -->
+                </a>
+            </h3>
         </header>
         <center><div id="mainHub">
             <?php
-                echo "<h2>Hello {$_SESSION['username']}</h2>";
+                echo "<h2>Hello {$_SESSION['username']}<br></h2>";
             ?>
-            
+            <div id="gridB">
+                
+            </div>
         </div></center>
         <footer>
             <form action="index.php" method="post">

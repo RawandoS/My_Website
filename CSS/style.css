@@ -2,12 +2,13 @@
 body {
   font-family: Georgia, 'Times New Roman', Times, serif;
   background: #ffd7a0;
-  color: #59350d;
+  color: #4f2d06;
 }
 
 header{
   background: linear-gradient(135deg, #bc5609, #d28d58);
-  padding: 20px 40px;
+  padding: 15px 20px;
+  margin-bottom: 8px;
   border-bottom: 20px;
   border-radius: 15px;
   display: flex;
@@ -20,28 +21,36 @@ header{
   z-index: 100;
 }
 
+header h2{
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 250px;
+}
+
 
 input, button{
   background-color: #d79244;
   border-style: solid;
   border-color: #6c3f0c;
-  border-width: 5px;
-  border-radius: 10%;
-  margin: 20 px;
+  border-width: 4px;
+  border-radius: 10px;
+  margin: 8px;
   padding: 10px;
 }
 
 footer{
   background: linear-gradient(135deg, #bc5609, #d28d58);
   color: #a94c2a;
-  padding: 2rem 1rem;
+  padding: 15px 20px;
+  margin-bottom: 8px;
+  border-bottom: 20px;
+  border-radius: 15px;
   font-size: large;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  max-width: 1200px;
-  border-radius: 15px;
   margin: auto;
   text-align: center;
   text-decoration: none;
@@ -55,13 +64,23 @@ a{
 }
 
 #mainHub{
-  border-radius: 15%;
-  
-  border-color: #1f1c2c;
+  margin: 15px;
+  border-width: 5px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #652d08;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #echos{
   text-align: center;
   font-size: large;
   font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#account{
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  margin-right: 10px;
 }
