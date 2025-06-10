@@ -8,6 +8,7 @@ body {
 header{
   background: linear-gradient(135deg, #1f1c2c, #928dab);
   padding: 20px 40px;
+  border-radius: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,6 +30,7 @@ footer{
   align-items: center;
   gap: 1.5rem;
   max-width: 1200px;
+  border-radius: 15px;
   margin: auto;
   text-align: center;
   text-decoration: none;
