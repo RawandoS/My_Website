@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if (!isset($_SESSION['isLoggedIn'])){
         header('Location: login.php');
         exit();
@@ -8,13 +9,13 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>MySecondPage</title>
+        <title>Sanitation</title>
         <link rel="stylesheet" href="CSS/style.css" media="screen">
     </head>
     <body>
-        <header>2nd Page</header>
+        <header>Sanitations</header>
         <a href="glass.php" target="_self">
-            <button>To the other site</button>
+            <button>To Make Glass</button>
         </a>
         <form action="home.php" method="post">
             <label>username:</label><br>

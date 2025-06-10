@@ -26,9 +26,12 @@
                 <button>Sanitation</button>
             </a>
         </header>
-        <center>
-            <h1>Hello</h1>
-        </center>
+        <center><div id="mainHub">
+            <?php
+                echo "<h2>Hello {$_SESSION['username']}</h2>";
+            ?>
+            
+        </div></center>
         <footer>
             <form action="index.php" method="post">
                 <input type="submit" name="logout" value="Logout">

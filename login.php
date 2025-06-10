@@ -24,7 +24,6 @@
                     $database_password = $row["password"];
                     if ($database_username == $username && $database_password == $password) {
                         echo '<script>alert("You are logged in")</script>';
-                        echo 'You are logged in';
 
                         $_SESSION['username'] = $username;
                         $_SESSION['password'] = $password;

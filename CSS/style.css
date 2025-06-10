@@ -1,13 +1,14 @@
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #0f0f0f;
-  color: #ffffff;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background: #ffd7a0;
+  color: #59350d;
 }
 
 header{
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  background: linear-gradient(135deg, #bc5609, #d28d58);
   padding: 20px 40px;
+  border-bottom: 20px;
   border-radius: 15px;
   display: flex;
   justify-content: space-between;
@@ -19,11 +20,21 @@ header{
   z-index: 100;
 }
 
+
+input, button{
+  background-color: #d79244;
+  border-style: solid;
+  border-color: #6c3f0c;
+  border-width: 5px;
+  border-radius: 10%;
+  margin: 20 px;
+  padding: 10px;
+}
+
 footer{
-  background-color: #2e4069;
+  background: linear-gradient(135deg, #bc5609, #d28d58);
   color: #a94c2a;
   padding: 2rem 1rem;
-  font-family: 'Segoe UI', sans-serif;
   font-size: large;
   display: flex;
   flex-direction: column;
@@ -38,4 +49,19 @@ footer{
 
 a{
   text-decoration: none;
+  text-align: center;
+  font-size: large;
+  text-decoration: none;
+}
+
+#mainHub{
+  border-radius: 15%;
+  
+  border-color: #1f1c2c;
+}
+
+#echos{
+  text-align: center;
+  font-size: large;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
