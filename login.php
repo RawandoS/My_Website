@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("database.php");
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -23,6 +24,12 @@
                     $database_password = $row["password"];
                     if ($database_username == $username && $database_password == $password) {
                         echo '<script>alert("You are logged in")</script>';
+
+                        $_SESSION['username'] = $username;
+                        $_SESSION['password'] = $password;
+                        $_SESSION['isLoggesIn'] = true;
+
+                        sleep(0.5);
                         header("Location: home.php");
                         exit();
                     }

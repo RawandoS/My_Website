@@ -19,7 +19,7 @@
             try{
                 mysqli_query($conn, $sql);
                 echo '<script>alert("You have been registered")</script>';
-                header("Location: home.php");
+                header("Location: login.php");
                 exit();
             }catch(mysqli_sql_exception $e){
                 echo '<script>alert("USername already exists")</script>';

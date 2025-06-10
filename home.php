@@ -1,3 +1,14 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['isLoggedIn'])){
+        header('Location: login.php');
+        exit();
+    }
+    if (isset($_POST["logout"])){
+        session_destroy();
+        header("Location: index.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,8 +30,9 @@
             <h1>Hello</h1>
         </center>
         <footer>
-            <a href="home.php">Home</a>
-            <a href="index.php">Index</a>
+            <form action="index.php" method="post">
+                <input type="submit" name="logout" value="Logout">
+            </form>
         </footer>
     </body>
 </html>
