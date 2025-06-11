@@ -95,11 +95,11 @@
         </a>
         <form method="post">
             <label>Height:</label><br>
-            <input type="number", name="Height"><br>
+            <input type="number", name="Height", min="0" , value="10"><br>
             <label>Widht:</label><br>
-            <input type="number", name="Widht"><br>
+            <input type="number", name="Widht", min="0", value="10"><br>
             <label>Depth:</label><br>
-            <input type="number", name="Depth"><br>
+            <input type="number", name="Depth", min="0", value="10"><br>
             <input type="submit" value="Creat glass">
         </form>
         <?php
