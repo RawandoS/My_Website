@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if (isset($_SESSION["username"]) && $_SESSION["isLoggedIn"]){
+        header('Location: home.php');
+        exit();
+    }
     include("database.php");
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -22,7 +27,7 @@
                 header("Location: login.php");
                 exit();
             }catch(mysqli_sql_exception $e){
-                echo '<script>alert("USername already exists")</script>';
+                echo '<script>alert("Username already exists")</script>';
             }
         }
     }

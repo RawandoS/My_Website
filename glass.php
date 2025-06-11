@@ -90,7 +90,7 @@
     </head>
     <body>
         <header>My Site</header>
-        <a href="sanitation.php" target="_self">
+        <a href="Home.php" target="_self">
             <button>To the other site</button>
         </a>
         <form method="post">
@@ -104,19 +104,22 @@
         </form>
         <?php
             
-            $Glass1 = new Glass(filteredPOST("Height"), filteredPOST("Widht"),filteredPOST("Depth"));
-            $Glass2 = new Glass(5,20,10);
-            $Glass1->printVolume();
-            $Glass2->printVolume();
-            if ($Glass1->isBigger($Glass2)){
-                echo "Glass 1 is bigger!<br>";
-            } else {
-                echo "Glass 2 is bigger!<br>";
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $Glass1 = new Glass(filteredPOST("Height"), filteredPOST("Widht"),filteredPOST("Depth"));
+                $Glass2 = new Glass(5,20,10);
+                $Glass1->printVolume();
+                $Glass2->printVolume();
+                if ($Glass1->isBigger($Glass2)){
+                    echo "Glass 1 is bigger!<br>";
+                } else {
+                    echo "Glass 2 is bigger!<br>";
+                }
+                
             }
+            
             function filteredPOST($key){
                 return isset($_POST[$key]) ? $_POST[$key] : 0.1;
             }
-            
         ?>
 
         <footer>
