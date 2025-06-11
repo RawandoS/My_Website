@@ -11,11 +11,12 @@
         echo "You're not connected";
     }
 
-    printAlbum("Radiohead Rainbows");
+    printAlbum("Damn");
 
     function returnAlbum($searchString) {
+        include("keys.php");
         $curl = curl_init();
-        $token = "";
+        $token = $tokenKey;
         $query = urlencode($searchString);
         $url = "https://api.discogs.com/database/search?q={$query}&type=release";
         curl_setopt($curl, CURLOPT_URL,"{$url}");
@@ -40,16 +41,25 @@
     
     function printAlbum($searchString) {
         $releaseData = returnAlbum($searchString);
-        echo "<h1>{$releaseData['title']} ({$releaseData['year']})</h1>";
+        $artists = "";
+        foreach ($releaseData['artists'] as $artist){
+            $artists .= " ".$artist['name'];
+        }
+        echo "<h1>{$artists}: {$releaseData['title']}<br>
+            ({$releaseData['year']})
+            {$releaseData['released']}</h1>";
+        echo "<br>";
+        // TODO: adding genre and styles
         foreach ($releaseData['tracklist'] as $track) {
             echo "{$track['position']}. {$track['title']} ({$track['duration']})<br>";
         }
     }
 
     function getAlbumId($searchString) {
+        include("keys.php");
         $curl = curl_init();
-        $token = "";
-        $query = urlencode("Kanye West The College Dropout");
+        $token = $tokenKey;
+        $query = urlencode("$searchString");
         $url = "https://api.discogs.com/database/search?q={$query}&type=release";
         curl_setopt($curl, CURLOPT_URL,"{$url}");
         curl_setopt($curl, CURLOPT_HTTPHEADER,array(
