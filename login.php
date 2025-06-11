@@ -32,6 +32,11 @@
                         $_SESSION['username'] = $username;
                         $_SESSION['password'] = $password;
                         $_SESSION['isLoggedIn'] = true;
+                        if ($username == "admin" && $password ==  "admin"){
+                            $_SESSION['isAdmin'] = true;
+                        }else{
+                            $_SESSION[''] = false;
+                        }
 
                         header("Location: home.php");
                         exit();

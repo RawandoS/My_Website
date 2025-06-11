@@ -1,5 +1,4 @@
 <?php
-
     $db_server = "localhost";
     $db_user = "root";
     $db_pass = "";
@@ -11,5 +10,4 @@
     }catch(mysqli_sql_exception $e) {
         echo "You're not connected";
     }    
-
 ?>
