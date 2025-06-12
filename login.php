@@ -8,7 +8,7 @@
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         $username = filter_input(INPUT_POST,"username",
-                                 FILTER_SANITIZE_SPECIAL_CHARS);    
+                                FILTER_SANITIZE_SPECIAL_CHARS);    
         $password = filter_input(INPUT_POST,"password",
                                 FILTER_SANITIZE_SPECIAL_CHARS);
         
@@ -35,7 +35,7 @@
                         if ($username == "admin" && $password ==  "admin"){
                             $_SESSION['isAdmin'] = true;
                         }else{
-                            $_SESSION[''] = false;
+                            $_SESSION['isAdmin'] = false;
                         }
 
                         header("Location: home.php");

@@ -1,6 +1,10 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
+        header('Location: login.php');
+        exit();
+    }
     printAlbum("Damn");
-    addAlbumToDatabase("GNX");
 
     function returnAlbum($searchString) {
         include("keys.php");
@@ -28,7 +32,7 @@
         return $releaseData;
     }
     
-    function printAlbum($searchString) {
+    function printAlbum($searchString): void {
         $album = returnAlbum($searchString);
         $artists = "";
         foreach ($album['artists'] as $artist){
@@ -54,7 +58,7 @@
         echo'<br>Album ID:'.$albumId.'<br>';
     }
 
-    function getAlbumId($searchString) {
+    function getAlbumId($searchString): mixed {
         include("keys.php");
         $curl = curl_init();
         $token = $tokenKey;
@@ -74,7 +78,7 @@
         return $albumId;
     }
 
-    function addAlbumToDatabase($searchString){
+    function addAlbumToDatabase($searchString): void{
         $album = returnAlbum($searchString);
 
         $albumId = $album['id'];
@@ -149,6 +153,30 @@
             echo '<script>alert("Album added to the database")</script>';
         }catch(mysqli_sql_exception $e) {
             echo"Database albums error". $e->getMessage() ."";
+        }
+    }
+
+    function getAlbumFromDatabase($albumId): Album|bool {
+        include("database.php");
+        $albumId = filter_input(INPUT_POST,"$albumId",
+                                FILTER_SANITIZE_NUMBER_INT);
+    
+        if(empty($albumId)){
+            echo'<script>alert("Please enter the album ID")</script>';
+            return false;
+        }
+        $sql = "SELECT * FROM albums
+                WHERE = albumId = '$albumId' LIMIT 1";
+        try {
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result);
+            include("album.php");
+            $album = new Album($row["id"], $row["albumId"], $row["title"], $row["artits"], $row["year"], 
+                                $row["genres"], $row["styles"], $row["lables"], $row["trackNames"], $row["trackTimes"], $row["albumTime"]);
+            return $album;
+        }catch(mysqli_sql_exception $e) {
+            echo "Album not founde:". $e->getMessage() ."";
+            return false;
         }
     }
 

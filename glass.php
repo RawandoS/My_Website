@@ -89,9 +89,9 @@
         <link rel="stylesheet" href="CSS/style.css" media="screen">
     </head>
     <body>
-        <header>My Site</header>
+        <header><h2>My Site</h2></header>
         <a href="Home.php" target="_self">
-            <button>To the other site</button>
+            <button>To the HUB</button>
         </a>
         <form method="post">
             <label>Height:</label><br>
