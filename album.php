@@ -58,5 +58,22 @@
         public function getAlbumTime(): string {
             return $this->albumTime;
         }
+
+        
+        public function printAlbum(): void{
+            echo "<h1>{$this->title} - {$this->year}</h1>";
+            $artistStr = implode(" ",$this->artists);
+            $genresStr = implode(", ", $this->genres);
+            $stylesStr = implode(", ", $this->styles);
+            $labelsStr = implode(", ", $this->labels);
+            echo "<h3>Artists: {$artistStr}</h3>";
+            echo "<h4>Genres: {$genresStr}<br>Styles: {$stylesStr}<br>Labels: {$labelsStr}</h4>";
+            $trackCount = 0;
+            foreach ($this->trackNames as $track){
+                echo "<p class='albumEcho'>".$track." (".$this->trackTimes[$trackCount].")<p>";
+                $trackCount++;
+            }
+            echo "<h3 class='finalInfo'>".$trackCount." tracks, ".$this->albumTime."</h3>";
+        }
     }
 ?>
