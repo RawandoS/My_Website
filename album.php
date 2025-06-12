@@ -1,7 +1,8 @@
 <?php
     class Album {
         private int $id;
-        private array $title;
+        private int $albumId;
+        private string $title;
         private array $artists;
         private int $year;
         private array $genres;
@@ -11,8 +12,9 @@
         private array $trackTimes;
         private string $albumTime;
 
-        function __construct(int $id, array $title, array $artists, int $year, array $genres, array $styles, array $labels, array $trackNames, array $trackTimes, string $albumTime) {
+        public function __construct(int $id,int $albumId ,string $title, array $artists, int $year, array $genres, array $styles, array $labels, array $trackNames, array $trackTimes, string $albumTime) {
             $this->id = $id;
+            $this->albumId = $albumId;
             $this->title = $title;
             $this->artists = $artists;
             $this->year = $year;
@@ -26,7 +28,10 @@
         public function getId(): int {
             return $this->id;
         }
-        public function getTitle(): array {
+        public function getAlbumId(): int {
+            return $this->albumId;   
+        }
+        public function getTitle(): string {
             return $this->title;
         }
         public function getArtists(): array {

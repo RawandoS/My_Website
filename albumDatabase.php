@@ -1,17 +1,6 @@
 <?php
-    $db_server = "localhost";
-    $db_user = "root";
-    $db_pass = "";
-    $db_name = "usersdatabase";
-    $conn = "";
-
-    try {
-        $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
-    }catch(mysqli_sql_exception $e) {
-        echo "You're not connected";
-    }
-
     printAlbum("Damn");
+    addAlbumToDatabase("GNX");
 
     function returnAlbum($searchString) {
         include("keys.php");
@@ -40,19 +29,29 @@
     }
     
     function printAlbum($searchString) {
-        $releaseData = returnAlbum($searchString);
+        $album = returnAlbum($searchString);
         $artists = "";
-        foreach ($releaseData['artists'] as $artist){
+        foreach ($album['artists'] as $artist){
             $artists .= " ".$artist['name'];
         }
-        echo "<h1>{$artists}: {$releaseData['title']}<br>
-            ({$releaseData['year']})
-            {$releaseData['released']}</h1>";
-        echo "<br>";
-        // TODO: adding genre and styles
-        foreach ($releaseData['tracklist'] as $track) {
+        echo "<h1>{$artists}: {$album['title']}<br>
+            ({$album['year']})
+            {$album['released']}</h1>";
+        $genres = "";
+        foreach ($album['genres'] as $genre){
+            $genres .= " ".$genre;
+        }
+        echo "<h2>{$genres}</h2>";
+        $styles = "";
+        foreach ($album['styles'] as $style){
+            $styles .= ' '.$style;
+        }
+        echo "<h2>{$styles}</h2>";
+        foreach ($album['tracklist'] as $track) {
             echo "{$track['position']}. {$track['title']} ({$track['duration']})<br>";
         }
+        $albumId = $album['id'];
+        echo'<br>Album ID:'.$albumId.'<br>';
     }
 
     function getAlbumId($searchString) {
@@ -77,7 +76,146 @@
 
     function addAlbumToDatabase($searchString){
         $album = returnAlbum($searchString);
+
+        $albumId = $album['id'];
+
+        $title = $album['title'];
+
+        $artists = [];
+        foreach ($album['artists'] as $artist){
+            array_push($artists, $artist['name']);
+        }
+        $artistStr = implode(',', $artists);
+
+        $year = $album['year'];
+
+        $genres = [];
+        foreach ($album['genres'] as $genre){
+            array_push($genres, $genre);
+        }
+        $genresStr = implode(',', $genres);
+
+        $styles = [];
+        foreach ($album['styles'] as $style){
+            array_push($styles, $style);
+        }
+        $stylesStr = implode(',', $styles);
+
+        $labels = [];
+        foreach ($album['labels'] as $label){
+            array_push($labels, $label['name']);
+        }
+        $labelsStr = implode(',', $labels);
+
+        $trackNames = [];
+        foreach ($album['tracklist'] as $track){
+            array_push($trackNames, $track['position'].".".$track["title"]);
+        }
+        $trackNamesStr = implode(",", $trackNames);
+
+        $trackTimes = [];
+        foreach ($album["tracklist"] as $track){
+            $duration = $track["duration"];
+            if ($duration == ""){
+                $duration = "00:00";
+            }
+            array_push($trackTimes, $duration);
+        }
+        $trackTimeStr = implode(",", $trackTimes);
         
+        $totSeconds = 0;
+        foreach ($trackTimes as $time){
+            if (strpos($time,":") === false){
+                continue;
+            }
+            list($minute, $second) = explode(":", $time);
+            $totSeconds += $minute*60 + $second;
+        }
+        $hour = floor($totSeconds /3600);
+        $totSeconds %= 3600;
+        $minute = floor($totSeconds /60);
+        $second = $totSeconds %60;
+        $albumTime = sprintf("%02d:%02d:%02d", $hour, $minute, $second);
+        
+        include("database.php");
+
+        $send = true;
+
+        $sql = "INSERT INTO albums (albumId, title, artists, year, genres, styles, labels, trackNames, trackTimes, albumTime)
+                VALUES ('$albumId', '$title', '$artistStr', '$year', '$genresStr', '$stylesStr', '$labelsStr', '$trackNamesStr', '$trackTimeStr', '$albumTime')";
+        
+        try {
+            mysqli_query($conn, $sql);
+            echo '<script>alert("Album added to the database")</script>';
+        }catch(mysqli_sql_exception $e) {
+            echo"Database albums error". $e->getMessage() ."";
+        }
     }
-    
+
+    function oldCreateAlbum($searchString){
+        include('album.php');
+        $album = returnAlbum($searchString);
+
+        $albumId = $album['id'];
+        echo'this is id:'.$albumId.'<br>';
+        $title = $album['title'];
+        echo'title:'.$title.'<br>';
+        $artists = [];
+        foreach ($album['artists'] as $artist){
+            array_push($artists, $artist['name']);
+        }
+        $artistStr = implode(',', $artists);
+        echo "Artist: {$artistStr}<br>";
+        $year = $album['year'];
+        echo 'year:'.$year.'<br>';
+        $genres = [];
+        foreach ($album['genres'] as $genre){
+            array_push($genres, $genre);
+        }
+        print_r($genres);
+        echo '<br>';
+        $styles = [];
+        foreach ($album['styles'] as $style){
+            array_push($styles, $style);
+        }
+        print_r($styles);
+        echo '<br>';
+        $labels = [];
+        foreach ($album['labels'] as $label){
+            array_push($labels, $label['name']);
+        }
+        print_r($labels);
+        echo '<br>';
+        $trackNames = [];
+        foreach ($album['tracklist'] as $track){
+            array_push($trackNames, $track['position'].".".$track["title"]);
+        }
+        print_r($trackNames);
+        echo "<br>";
+        $trackTimes = [];
+        foreach ($album["tracklist"] as $track){
+            $duration = $track["duration"];
+            if ($duration == ""){
+                $duration = "00:00";
+            }
+            array_push($trackTimes, $duration);
+        }
+        print_r($trackTimes);
+        echo "<br>";
+        
+        $totSeconds = 0;
+        foreach ($trackTimes as $time){
+            if (strpos($time,":") === false){
+                continue;
+            }
+            list($minute, $second) = explode(":", $time);
+            $totSeconds += $minute*60 + $second;
+        }
+        $hour = floor($totSeconds /3600);
+        $totSeconds %= 3600;
+        $minute = floor($totSeconds /60);
+        $second = $totSeconds %60;
+        $time = sprintf("%02d:%02d:%02d", $hour, $minute, $second);
+        echo "total time $time<br>";
+    }
 ?>
