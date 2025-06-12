@@ -4,9 +4,17 @@
         header('Location: login.php');
         exit();
     }
-    printAlbum("Damn");
 
-    function returnAlbum($searchString) {
+    include('album.php');
+    $album = getAlbumFromDatabase(33052227);
+    if ($album === false) {
+        echo'Wrong id';
+        exit();
+    }
+    $album->printAlbum() ;
+
+    //returns the string array from the converted json file from album specific ID
+    function returnAlbum($searchString): mixed {
         include("keys.php");
         $curl = curl_init();
         $token = $tokenKey;
@@ -27,12 +35,13 @@
         curl_setopt($curl, CURLOPT_URL, $releaseUrl);
         $releaseData = curl_exec($curl);
         $releaseData = json_decode($releaseData, true);
-        
+        //TODO: error handling (album not found)
         curl_close($curl);
         return $releaseData;
     }
     
-    function printAlbum($searchString): void {
+    //searches for an album and prints the results
+    function printSearchAlbum($searchString): void {
         $album = returnAlbum($searchString);
         $artists = "";
         foreach ($album['artists'] as $artist){
@@ -58,6 +67,7 @@
         echo'<br>Album ID:'.$albumId.'<br>';
     }
 
+    //returns albumID from search
     function getAlbumId($searchString): mixed {
         include("keys.php");
         $curl = curl_init();
@@ -78,6 +88,7 @@
         return $albumId;
     }
 
+    //searches album and then adds it to the database
     function addAlbumToDatabase($searchString): void{
         $album = returnAlbum($searchString);
 
@@ -156,32 +167,45 @@
         }
     }
 
+    //returns an album from an ID if found else it returns false
     function getAlbumFromDatabase($albumId): Album|bool {
         include("database.php");
-        $albumId = filter_input(INPUT_POST,"$albumId",
-                                FILTER_SANITIZE_NUMBER_INT);
-    
+        $albumId = filter_var($albumId, FILTER_SANITIZE_NUMBER_INT);
+
         if(empty($albumId)){
             echo'<script>alert("Please enter the album ID")</script>';
             return false;
         }
+
         $sql = "SELECT * FROM albums
-                WHERE = albumId = '$albumId' LIMIT 1";
+                WHERE albumId = '$albumId' LIMIT 1";
         try {
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result);
-            include("album.php");
-            $album = new Album($row["id"], $row["albumId"], $row["title"], $row["artits"], $row["year"], 
-                                $row["genres"], $row["styles"], $row["lables"], $row["trackNames"], $row["trackTimes"], $row["albumTime"]);
+            $album = new Album(
+                $row["id"], 
+                $row["albumId"], 
+                $row["title"], 
+                $row["artists"], 
+                $row["year"], 
+                $row["genres"], 
+                $row["styles"], 
+                $row["labels"], 
+                $row["trackNames"], 
+                $row["trackTimes"], 
+                $row["albumTime"]);
             return $album;
         }catch(mysqli_sql_exception $e) {
-            echo "Album not founde:". $e->getMessage() ."";
+            echo "Album not found:". $e->getMessage() ."";
             return false;
         }
     }
 
+    function searchAlbumFromDatabase($keyword) {
+        //TODO: with keyword find id and then return album
+    }    
+
     function oldCreateAlbum($searchString){
-        include('album.php');
         $album = returnAlbum($searchString);
 
         $albumId = $album['id'];

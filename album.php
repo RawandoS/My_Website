@@ -12,17 +12,17 @@
         private array $trackTimes;
         private string $albumTime;
 
-        public function __construct(int $id,int $albumId ,string $title, array $artists, int $year, array $genres, array $styles, array $labels, array $trackNames, array $trackTimes, string $albumTime) {
+        public function __construct(int $id,int $albumId ,string $title, string $artists, int $year, string $genres, string $styles, string $labels, string $trackNames, string $trackTimes, string $albumTime) {
             $this->id = $id;
             $this->albumId = $albumId;
             $this->title = $title;
-            $this->artists = $artists;
+            $this->artists = explode(",", $artists);
             $this->year = $year;
-            $this->genres = $genres;
-            $this->styles = $styles;
-            $this->labels = $labels;
-            $this->trackNames = $trackNames;
-            $this->trackTimes = $trackTimes;
+            $this->genres = explode(",", $genres);
+            $this->styles = explode(",", $styles);
+            $this->labels = explode(",", $labels);
+            $this->trackNames = explode(",", $trackNames);
+            $this->trackTimes = explode(",", $trackTimes);
             $this->albumTime = $albumTime;
         }
         public function getId(): int {
