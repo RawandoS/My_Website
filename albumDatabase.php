@@ -5,13 +5,7 @@
         exit();
     }
 
-    include('album.php');
-    $album = getAlbumFromDatabase(33052227);
-    if ($album === false) {
-        echo'Wrong id';
-        exit();
-    }
-    $album->printAlbum() ;
+    printAlbumFromDatabase(3305222547);
 
     //returns the string array from the converted json file from album specific ID
     function returnAlbum($searchString): mixed {
@@ -29,20 +23,30 @@
         curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
         $data = curl_exec($curl);
         $data = json_decode($data, true);
+        if (!isset($data['results'][0]['id'])) {
+            echo "The album id was not found<br>";
+            return false;
+        }
         $albumId = $data['results'][0]['id'];
-        
         $releaseUrl = "https://api.discogs.com/releases/{$albumId}";
         curl_setopt($curl, CURLOPT_URL, $releaseUrl);
         $releaseData = curl_exec($curl);
         $releaseData = json_decode($releaseData, true);
-        //TODO: error handling (album not found)
         curl_close($curl);
+        if (isset($releaseData["message"]) && $releaseData["message"] == "That release does not exist or may have been deleted.") {
+            echo "The id is wrong<br>";
+            return false;
+        }
         return $releaseData;
     }
     
     //searches for an album and prints the results
     function printSearchAlbum($searchString): void {
         $album = returnAlbum($searchString);
+        if (is_bool($album) && !$album) {
+            echo "Could not print the album";
+            return;
+        }
         $artists = "";
         foreach ($album['artists'] as $artist){
             $artists .= " ".$artist['name'];
@@ -182,6 +186,9 @@
         try {
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result);
+            if (mysqli_num_rows($result) == 0) {
+                return false;
+            }
             $album = new Album(
                 $row["id"], 
                 $row["albumId"], 
@@ -199,6 +206,16 @@
             echo "Album not found:". $e->getMessage() ."";
             return false;
         }
+    }
+
+    function printAlbumFromDatabase($albumId): void {
+        include('album.php');
+        $album = getAlbumFromDatabase($albumId);
+        if ($album === false) {
+            echo'Wrong input id';
+            exit();
+        }
+        $album->printAlbum() ;
     }
 
     function searchAlbumFromDatabase($keyword) {
