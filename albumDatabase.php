@@ -1,18 +1,18 @@
 <?php
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
         header('Location: login.php');
         exit();
     }
-
-    printAlbumFromDatabase(3305222547);
 
     //returns the string array from the converted json file from album specific ID
     function returnAlbum($searchString): mixed {
         include("keys.php");
         $curl = curl_init();
         $token = $tokenKey;
-        $query = urlencode($searchString);
+        $query = urlencode("$searchString");
         $url = "https://api.discogs.com/database/search?q={$query}&type=release";
         curl_setopt($curl, CURLOPT_URL,"{$url}");
         curl_setopt($curl, CURLOPT_HTTPHEADER,array(
@@ -87,17 +87,22 @@
         curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
         $data = curl_exec($curl);
         $data = json_decode($data, true);
+        if (!isset($data['results'][0]['id'])) {
+            echo "The album id was not found<br>";
+            return false;
+        }
         $albumId = $data['results'][0]['id'];
         curl_close($curl);
         return $albumId;
     }
 
     //searches album and then adds it to the database
-    function addAlbumToDatabase($searchString): void{
+    function addAlbumToDatabase($searchString): bool{
         $album = returnAlbum($searchString);
+        if (!$album) return false;
 
         $albumId = $album['id'];
-
+        
         $title = $album['title'];
 
         $artists = [];
@@ -158,7 +163,6 @@
         
         include("database.php");
 
-        $send = true;
 
         $sql = "INSERT INTO albums (albumId, title, artists, year, genres, styles, labels, trackNames, trackTimes, albumTime)
                 VALUES ('$albumId', '$title', '$artistStr', '$year', '$genresStr', '$stylesStr', '$labelsStr', '$trackNamesStr', '$trackTimeStr', '$albumTime')";
@@ -166,8 +170,10 @@
         try {
             mysqli_query($conn, $sql);
             echo '<script>alert("Album added to the database")</script>';
+            return true;
         }catch(mysqli_sql_exception $e) {
-            echo"Database albums error". $e->getMessage() ."";
+            echo"Database albums error: ". $e->getMessage() ."<br>";
+            return false;
         }
     }
 
@@ -208,6 +214,7 @@
         }
     }
 
+    //prints an album from the database using the album
     function printAlbumFromDatabase($albumId): void {
         include('album.php');
         $album = getAlbumFromDatabase($albumId);

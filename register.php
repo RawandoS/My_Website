@@ -18,6 +18,8 @@
         elseif (empty($password)) {
             echo "Please enter the password";
         }else{
+            $username = trim($username);
+            $password = trim($password);
             $sql = "INSERT INTO users (user, password)
                     VALUES ('$username', '$password')";
             

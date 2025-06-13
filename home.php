@@ -40,6 +40,9 @@
         <center><div id="mainHub">
             <?php
                 echo "<h2>Hello {$_SESSION['username']}<br></h2>";
+                if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == true){
+                    echo"admin button WIP";
+                }
             ?>
             <div id="gridB">
                 
