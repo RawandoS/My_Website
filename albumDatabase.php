@@ -98,12 +98,25 @@
 
     //searches album and then adds it to the database
     function addAlbumToDatabase($searchString): bool{
+        include("database.php");
         $album = returnAlbum($searchString);
         if (!$album) return false;
+
+        $sql = mysqli_prepare($conn, 
+            "INSERT INTO albums (albumId, title, artists, year, genres, styles, labels, trackNames, trackTimes, albumTime)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+
+        if (!$sql) {
+            echo "SQL error: " . mysqli_error($conn);
+            return false;
+        }
 
         $albumId = $album['id'];
         
         $title = $album['title'];
+
+        $year = $album['year'];
 
         $artists = [];
         foreach ($album['artists'] as $artist){
@@ -111,7 +124,6 @@
         }
         $artistStr = implode(',', $artists);
 
-        $year = $album['year'];
 
         $genres = [];
         foreach ($album['genres'] as $genre){
@@ -146,6 +158,9 @@
             array_push($trackTimes, $duration);
         }
         $trackTimeStr = implode(",", $trackTimes);
+        if (empty($trackTimeStr)) {
+            $trackTimeStr = '00:00';
+        }
         
         $totSeconds = 0;
         foreach ($trackTimes as $time){
@@ -160,20 +175,21 @@
         $minute = floor($totSeconds /60);
         $second = $totSeconds %60;
         $albumTime = sprintf("%02d:%02d:%02d", $hour, $minute, $second);
-        
-        include("database.php");
 
+        mysqli_stmt_bind_param(
+            $sql, 
+            'sssissssss', 
+            $albumId, $title, $artistStr, $year, $genresStr, $stylesStr, $labelsStr, $trackNamesStr, $trackTimeStr, $albumTime
+        );
 
-        $sql = "INSERT INTO albums (albumId, title, artists, year, genres, styles, labels, trackNames, trackTimes, albumTime)
-                VALUES ('$albumId', '$title', '$artistStr', '$year', '$genresStr', '$stylesStr', '$labelsStr', '$trackNamesStr', '$trackTimeStr', '$albumTime')";
-        
         try {
-            mysqli_query($conn, $sql);
-            echo '<script>alert("Album added to the database")</script>';
+            mysqli_stmt_execute($sql);
             return true;
-        }catch(mysqli_sql_exception $e) {
-            echo"Database albums error: ". $e->getMessage() ."<br>";
+        } catch(mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage();
             return false;
+        } finally {
+            mysqli_stmt_close($sql);
         }
     }
 
