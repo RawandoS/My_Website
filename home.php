@@ -41,9 +41,11 @@
             <?php
                 echo "<h2>Hello {$_SESSION['username']}<br></h2>";
                 if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == true){
-                    echo"admin button WIP";
                 }
             ?>
+            <a href="admin.php" target="_self">
+                <button>To database control</button>
+            </a>
             <div id="gridB">
                 
             </div>

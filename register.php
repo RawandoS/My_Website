@@ -13,10 +13,10 @@
                                 FILTER_SANITIZE_SPECIAL_CHARS);
         
         if (empty($username)) {
-            echo "Please enter the username";
+            echo '<script>alert("Please enter the username")</script>';
         }
         elseif (empty($password)) {
-            echo "Please enter the password";
+            echo '<script>alert("Please enter the password")</script>';
         }else{
             $username = trim($username);
             $password = trim($password);
