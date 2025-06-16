@@ -19,7 +19,6 @@ header {
 
 .hub {
   text-align: center;
-  padding: 15px 0;
   order: 1;
 }
 
@@ -64,7 +63,7 @@ header {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  padding: 20px;
+  padding: 15px;
   width: calc(100% - 40px);
   margin: 0 auto;
   min-height: 50vh;
@@ -73,7 +72,7 @@ header {
 .leftGrid, .rightGrid {
   background: linear-gradient(135deg, #eeb78c, #ecc3a4);
   border-radius: 15px;
-  padding: 20px;
+  padding: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -106,7 +105,7 @@ input, button {
   background-color: #d79244;
   color: #4f2d06;
   border: 2px solid #6c3f0c;
-  padding: 12px 20px;
+  padding: 4px 6px;
   margin: 5px;
   cursor: pointer;
   font-weight: bold;
@@ -116,6 +115,21 @@ input, button {
 input:hover, button:hover {
   background-color: #df7b2f;
   color: #fff;
+}
+
+#gridB {
+  overflow: auto;
+  max-height: calc(100vh - 250px);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.dataTables_wrapper {
+  position: relative;
+}
+
+.dataTables_scrollBody {
+  overflow-y: auto;
 }
 
 footer {
@@ -141,7 +155,7 @@ a {
 }
 
 #mainHub {
-  margin: 15px;
+  margin: 8px;
   border: 5px solid #652d08;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
