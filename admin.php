@@ -24,10 +24,12 @@
                         <button>Home</button>
                     </a>
                 </div>
-                <div class="rightNav" id="account">
-                    <p><?php echo strtoupper($_SESSION['username']);?></p>
+                <div class="rightNav" id="account">            
                     <a href="accountPage.php">
-                        <img src="images/accountIcon.png" alt="User" class="userIcon">
+                        <button>
+                            <p><?php echo strtoupper($_SESSION['username']);?></p>
+                            <img src="images/accountIcon.png" alt="User" class="userIcon">
+                        </button>
                     </a>
                 </div>
             </nav>
@@ -35,7 +37,7 @@
         <div class="centralGrid">
             <div class="leftGrid">
                 <form class="databaseForm" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                    <label id="addAlbum">Album to add (Artist + albumName):</label><br>
+                    <label id="addAlbum">Album to add <br>(Artist + albumName):</label><br>
                     <input type="text" name="albumName"><br>
                     <input type="submit" name="submit" value="Add to Database">
                 </form>
@@ -63,7 +65,8 @@
                     <input type="text" name="albumID"><br>
                     <input type="submit" name="submit" value="Search from Database">
                 </form>
-                <?php
+            </div>
+            <?php
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["albumID"])){
                         $albumID = filter_input(INPUT_POST,"albumID",
                                         FILTER_SANITIZE_SPECIAL_CHARS);
@@ -75,7 +78,6 @@
                         $_POST ["albumID"] = "";
                     }
                 ?>
-            </div>
         </div>
         <footer>
 

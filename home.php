@@ -30,9 +30,11 @@
                     </a>
                 </div>
                 <div class="rightNav" id="account">
-                    <p><?php echo strtoupper($_SESSION['username']);?></p>
                     <a href="accountPage.php">
-                        <img src="images/accountIcon.png" alt="User" class="userIcon">
+                        <button>
+                            <p><?php echo strtoupper($_SESSION['username']);?></p>
+                            <img src="images/accountIcon.png" alt="User" class="userIcon">
+                        </button>
                     </a>
                 </div>
             </nav>
@@ -41,11 +43,11 @@
             <?php
                 echo "<h2>Hello {$_SESSION['username']}<br></h2>";
                 if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == true){
+                    echo '<a href="admin.php" target="_self">
+                        <button>To database control</button>
+                    </a>';
                 }
             ?>
-            <a href="admin.php" target="_self">
-                <button>To database control</button>
-            </a>
             <div id="gridB">
                 
             </div>

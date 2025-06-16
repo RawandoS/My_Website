@@ -121,6 +121,10 @@ input:hover, button:hover {
 footer {
   background: linear-gradient(135deg, #bc5609, #d28d58);
   color: #a94c2a;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   padding: 15px 20px;
   margin-top: 20px;
   font-size: large;
