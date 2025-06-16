@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (isset($_SESSION["username"]) && $_SESSION["isLoggedIn"]){
+    if (isset($_SESSION["username"]) && $_SESSION["isLoggedIn"] == true){
         header('Location: home.php');
         exit();
     }
@@ -28,15 +28,11 @@
                     $database_password = $row["password"];
                     if ($database_username == $username && $database_password == $password) {
                         echo '<script>alert("You are logged in")</script>';
-                        echo "name found";
                         $_SESSION['username'] = $username;
                         $_SESSION['password'] = $password;
                         $_SESSION['isLoggedIn'] = true;
-                        if ($username == "admin"){
-                            $_SESSION['isAdmin'] = true;
-                        }else{
-                            $_SESSION['isAdmin'] = false;
-                        }
+                        $_SESSION['isAdmin'] = $row['isAdmin'];
+                        $_SESSION['canLog'] = $row['canLog'];
 
                         header("Location: home.php");
                         exit();
@@ -72,7 +68,7 @@
                 </div>
                 <div class="rightNav">
                     <a href="index.php" target="_self">
-                        <button>Homepage</button>
+                        <button>Home page</button>
                     </a>
                 </div>
             </nav>

@@ -56,7 +56,7 @@
                 </div>
                 <div class="rightNav">
                     <a href="index.php" target="_self">
-                        <button>Homepage</button>
+                        <button>Home page</button>
                     </a>
                 </div>
             </nav>

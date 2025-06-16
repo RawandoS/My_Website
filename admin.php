@@ -4,6 +4,16 @@
         header('Location: login.php');
         exit();
     }
+    if (isset($_SESSION["canLog"]) && $_SESSION["canLog"] == false) {
+        echo '<script>
+                alert("You are banned from the server");
+                window.location.href = "index.php";
+            </script>';
+        $_SESSION['username'] = "";
+        $_SESSION['isLoggedIn'] = false;
+        session_destroy();
+       exit();
+    }
     include("albumDatabase.php");
 ?>
 <!DOCTYPE html>

@@ -11,7 +11,7 @@
     <body>
         <header>
             <div class="hub">
-                <h2>HOMEPAGE</h2>
+                <h2>HOME PAGE</h2>
             </div>
             <nav class="navbar">
                 <div class="leftNav">

@@ -1,5 +1,15 @@
 <?php
     session_start();
+    if (isset($_SESSION["canLog"]) && $_SESSION["canLog"] == false) {
+        echo '<script>
+                alert("You are banned from the server");
+                window.location.href = "index.php";
+            </script>';
+        $_SESSION['username'] = "";
+        $_SESSION['isLoggedIn'] = false;
+        session_destroy();
+       exit();
+    }
     if (!isset($_SESSION['isLoggedIn'])) {
         header('Location: login.php');
         exit();
@@ -49,7 +59,17 @@
                 }
             ?>
             <div id="gridB">
-                
+                <?php
+                    /*$sql = "SELECT * FROM albums LIMIT 3";
+                    try {
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo "Title: ".$row["title"]." - year: ".$row["year"];
+                        }
+                    } catch (mysqli_sql_exception $e) {
+                        echo "error";
+                    }*/
+                ?>
             </div>
         </div></center>
         <footer>
