@@ -37,7 +37,6 @@
                 <div class="rightNav" id="account">            
                     <a href="accountPage.php">
                         <button>
-                            <p><?php echo strtoupper($_SESSION['username']);?></p>
                             <img src="images/accountIcon.png" alt="User" class="userIcon">
                         </button>
                     </a>
@@ -62,7 +61,7 @@
                         }
                         $check = addAlbumToDatabase($albumName);
                         if (!$check) {
-                            echo "Album not added";
+                            echo '<script>alert("Album not added")</script>';
                         }
                         header("Location: " . $_SERVER['PHP_SELF']);
                         exit();

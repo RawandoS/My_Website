@@ -235,7 +235,7 @@
                 $row["albumTime"]);
             return $album;
         }catch(mysqli_sql_exception $e) {
-            echo "Album not found:". $e->getMessage() ."";
+            echo "Album not found:". $e->getMessage();
             return false;
         }
     }
@@ -251,8 +251,44 @@
         $album->printAlbum() ;
     }
 
+    function printAlbumFromDatabaseKeyword($keyword): void {
+        include('album.php');
+        $album = searchAlbumFromDatabase($keyword);
+        if ($album === false) {
+            echo'Wrong input id';
+            exit();
+        }
+        $album->printAlbum() ;
+    }
+
     function searchAlbumFromDatabase($keyword) {
-        //TODO: with keyword find id and then return album
+        include("database.php");
+        $keyword = filter_var($keyword, FILTER_SANITIZE_SPECIAL_CHARS);
+
+        $sql = "SELECT * FROM albums WHERE title LIKE '%$keyword%' LIMIT 1";
+        try {
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result);
+            if (mysqli_num_rows($result) == 0) {
+                return false;
+            }
+            $album = new Album(
+                $row["id"], 
+                $row["albumId"], 
+                $row["title"], 
+                $row["artists"], 
+                $row["year"], 
+                $row["genres"], 
+                $row["styles"], 
+                $row["labels"], 
+                $row["trackNames"], 
+                $row["trackTimes"], 
+                $row["albumTime"]);
+            return $album;
+        }catch(mysqli_sql_exception $e) {
+            echo "Album not found:". $e->getMessage();
+            return false;
+        }
     }    
 
     function oldCreateAlbum($searchString){

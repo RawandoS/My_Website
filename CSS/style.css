@@ -23,6 +23,7 @@ header {
 }
 
 .hub h2 {
+  padding: 8px;
   margin: 0;
   font-size: 2em;
   text-align: center;
