@@ -8,7 +8,6 @@ body {
 
 header {
   background: linear-gradient(135deg, #bc5609, #d28d58);
-  border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   margin-bottom: 20px;
   padding: 0;
@@ -17,8 +16,6 @@ header {
   width: 100%;
   overflow: hidden;
 }
-
-
 
 .hub {
   text-align: center;
@@ -37,9 +34,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 30px;
-  background-color: rgba(255, 255, 255, 0.1);
   order: 2;
-  width: 100%;
   width: calc(100% - 60px);
 }
 
@@ -65,21 +60,69 @@ header {
   object-fit: contain;
 }
 
-input, button {
-  background-color: #d79244;
-  border: 4px solid #6c3f0c;
-  border-radius: 10px;
-  margin: 8px;
-  padding: 10px;
+.centralGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  width: calc(100% - 40px);
+  margin: 0 auto;
+  min-height: 50vh;
 }
 
+.leftGrid, .rightGrid {
+  background: linear-gradient(135deg, #eeb78c, #ecc3a4);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.databaseForm {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.databaseForm label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.databaseForm input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: #f8e2cf;
+  border: 2px solid #6c3f0c;
+}
+
+input, button {
+  border-radius: 10px;
+  background-color: #d79244;
+  color: #4f2d06;
+  border: 2px solid #6c3f0c;
+  padding: 12px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+input:hover, button:hover {
+  background-color: #bc5609;
+  color: #fff;
+}
 
 footer {
   background: linear-gradient(135deg, #bc5609, #d28d58);
   color: #a94c2a;
   padding: 15px 20px;
   margin-top: 20px;
-  border-radius: 15px;
   font-size: large;
   display: flex;
   flex-direction: column;
@@ -96,7 +139,6 @@ a {
 #mainHub {
   margin: 15px;
   border: 5px solid #652d08;
-  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
