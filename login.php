@@ -28,11 +28,11 @@
                     $database_password = $row["password"];
                     if ($database_username == $username && $database_password == $password) {
                         echo '<script>alert("You are logged in")</script>';
-
+                        echo "name found";
                         $_SESSION['username'] = $username;
                         $_SESSION['password'] = $password;
                         $_SESSION['isLoggedIn'] = true;
-                        if ($username == "admin" && $password ==  "admin"){
+                        if ($username == "admin"){
                             $_SESSION['isAdmin'] = true;
                         }else{
                             $_SESSION['isAdmin'] = false;
@@ -40,9 +40,9 @@
 
                         header("Location: home.php");
                         exit();
+                    }else{
+                       echo '<script>alert("Wrong username or password")</script>';
                     }
-                }else{
-                    echo '<script>alert("Wrong username or password")</script>';
                 }
             }catch(mysqli_sql_exception $e){
                 echo '<script>alert("Wrong username or password")</script>';
