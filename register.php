@@ -20,6 +20,9 @@
         }else{
             $username = trim($username);
             $password = trim($password);
+            
+            $password = password_hash($password, PASSWORD_DEFAULT);
+
             $sql = "INSERT INTO users (user, password)
                     VALUES ('$username', '$password')";
             
@@ -67,7 +70,7 @@
                     <label>Username:</label><br>
                     <input type="text" name="username"><br>
                     <label>Password:</label><br>
-                    <input type="password" name="password"><br>
+                    <input type="password" name="password" minlength="8"><br>
                     <input type="submit" name="submit" value="Register">
                 </form>
             </center>

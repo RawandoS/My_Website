@@ -26,10 +26,10 @@
                     $row = mysqli_fetch_array($result);
                     $database_username = $row["user"];
                     $database_password = $row["password"];
-                    if ($database_username == $username && $database_password == $password) {
+                    if ($database_username == $username && password_verify($password, $database_password)) {
                         echo '<script>alert("You are logged in")</script>';
                         $_SESSION['username'] = $username;
-                        $_SESSION['password'] = $password;
+                        $_SESSION['password'] = $database_password;
                         $_SESSION['isLoggedIn'] = true;
                         $_SESSION['isAdmin'] = $row['isAdmin'];
                         $_SESSION['canLog'] = $row['canLog'];
@@ -79,7 +79,7 @@
                     <label>Username:</label><br>
                     <input type="text" name="username"><br>
                     <label>Password:</label><br>
-                    <input type="password" name="password"><br>
+                    <input type="password" name="password" minlength="8"><br>
                     <input type="submit" name="submit" value="Login">
                 </form>
             </center>

@@ -49,9 +49,9 @@
                 <label>Old password:</label><br>
                 <input type="password" name="oldPassword"><br>
                 <label>New password:</label><br>
-                <input type="password" name="newPassword" minlength="6"><br>
+                <input type="password" name="newPassword" minlength="8"><br>
                 <label>Confirm new password:</label><br>
-                <input type="password" name="newPasswordConf" minlength="6"><br>
+                <input type="password" name="newPasswordConf" minlength="8"><br>
                 <input type="submit" name="submit" value="Change password">
             </form>
             <?php
@@ -67,7 +67,11 @@
                         echo '<script>alert("Do not leave any blank spaces")</script>';
                         exit();
                     }
-                    if ($oldPassword != $_SESSION["password"]){
+                    $oldPassword = trim($oldPassword);
+                    $newPassword = trim($newPassword);
+                    $newPasswordConf = trim($newPasswordConf);
+
+                    if (!password_verify($oldPassword,$_SESSION["password"])){
                         echo '<script>alert("Old password not correct")</script>';
                         exit();
                     }
@@ -75,7 +79,9 @@
                         echo '<script>alert("The two new password are not the same")</script>';
                         exit();
                     }
-                    $newPassword = trim($newPassword);
+                    $oldPassword = $_SESSION["password"];
+                    $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
                     $sql = "UPDATE users SET password = '$newPassword'
                             WHERE password = '$oldPassword'";
                     try {
