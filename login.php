@@ -61,10 +61,21 @@
     </head>
     <body>
         <header>
-            <h1>Login</h1>
-            <a href="register.php" target="_self">
-                <button>Register</button>
-            </a>
+            <div class="hub">
+                <h2>LOGIN</h2>
+            </div>
+            <nav class="navbar">
+                <div class="leftNav">
+                    <a href="register.php" target="_self">
+                        <button>Register</button>
+                    </a>
+                </div>
+                <div class="rightNav">
+                    <a href="index.php" target="_self">
+                        <button>Homepage</button>
+                    </a>
+                </div>
+            </nav>
         </header>
         <div>
             <center>

@@ -10,13 +10,21 @@
     </head>
     <body>
         <header>
-            <h2>Home Page</h2>
-            <a href="Login.php" target="_self">
-                <button>Login</button>
-            </a>
-            <a href="Register.php">
-                <button>Register</button>
-            </a>
+            <div class="hub">
+                <h2>HOMEPAGE</h2>
+            </div>
+            <nav class="navbar">
+                <div class="leftNav">
+                    <a href="login.php" target="_self">
+                        <button>Login</button>
+                    </a>
+                </div>
+                <div class="rightNav">
+                    <a href="register.php" target="_self">
+                        <button>Register</button>
+                    </a>
+                </div>
+            </nav>
         </header>
         <center><h1>Welcome</h1></center>
     </body>
