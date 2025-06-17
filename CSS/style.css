@@ -1,9 +1,22 @@
+@media (max-width: 768px) {
+  .centralGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .leftGrid, .rightGrid {
+    min-height: auto;
+  }
+}
+
 body {
   font-family: Georgia, 'Times New Roman', Times, serif;
   background: #ffd7a0;
   color: #4f2d06;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 header {
@@ -63,27 +76,37 @@ header {
 .centralGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  padding: 15px;
+  gap: 30px;
+  padding: 25px;
   width: calc(100% - 40px);
-  margin: 0 auto;
-  min-height: 50vh;
+  flex: 1;
+  margin-bottom: 80px;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  min-height: 60vh;
 }
 
 .leftGrid, .rightGrid {
   background: linear-gradient(135deg, #eeb78c, #ecc3a4);
   border-radius: 15px;
-  padding: 12px;
+  padding: 25px;
+  min-height: 300px;
+  gap: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  box-sizing: border-box;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .databaseForm {
   width: 100%;
+  box-sizing: border-box;
   max-width: 400px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .databaseForm label {
@@ -94,9 +117,8 @@ header {
 }
 
 .databaseForm input[type="text"] {
-  width: 100%;
+  width: calc(100% - 30px);
   padding: 12px;
-  margin-bottom: 15px;
   background-color: #f8e2cf;
   border: 2px solid #6c3f0c;
 }

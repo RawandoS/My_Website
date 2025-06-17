@@ -62,6 +62,7 @@
                         $check = addAlbumToDatabase($albumName);
                         if (!$check) {
                             echo '<script>alert("Album not added")</script>';
+                            exit();
                         }
                         echo '<script>
                             alert("Album added to the database");
