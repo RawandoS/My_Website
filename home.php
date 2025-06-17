@@ -28,8 +28,9 @@
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             if ($row["albumTime"] == "00:00:00") {
-                $row["albumTime"] = "DBA";
+                $row["albumTime"] = "N/A";
             }
+            $row["artists"] = str_replace(",",", ", $row["artists"]);
             $data[] = $row;
         }
     }
@@ -53,6 +54,15 @@
                     <a href="glass.php" target="_self">
                         <button>Glass Maker</button>
                     </a>
+                </div>
+                <div class="center">
+                    <?php
+                        if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == true){
+                            echo '<a href="admin.php" target="_self">
+                                <button>To database control</button>
+                            </a>';
+                        }
+                    ?>
                 </div>
                 <div class="rightNav" id="account">
                     <a href="accountPage.php">
@@ -100,13 +110,6 @@
             </div>
         </div></center>
         <footer>
-            <?php
-                if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == true){
-                    echo '<a href="admin.php" target="_self">
-                        <button>To database control</button>
-                    </a>';
-                }
-            ?>
             <form method="post">
                 <input type="submit" name="logout" value="Logout">
             </form>

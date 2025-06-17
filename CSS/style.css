@@ -119,6 +119,7 @@ input:hover, button:hover {
 }
 
 #gridB {
+  margin: 8px;
   overflow: auto;
   max-height: calc(100vh - 265px);
   margin-bottom: 20px;
@@ -156,7 +157,7 @@ a {
 }
 
 #mainHub {
-  margin: 8px;
+  margin: 8px 20px;
   border: 5px solid #652d08;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

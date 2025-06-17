@@ -12,7 +12,7 @@
         $_SESSION['username'] = "";
         $_SESSION['isLoggedIn'] = false;
         session_destroy();
-       exit();
+        exit();
     }
     include("albumDatabase.php");
 ?>
@@ -63,7 +63,10 @@
                         if (!$check) {
                             echo '<script>alert("Album not added")</script>';
                         }
-                        header("Location: " . $_SERVER['PHP_SELF']);
+                        echo '<script>
+                            alert("Album added to the database");
+                            window.location.href = "admin.php";
+                        </script>';
                         exit();
                     }
                 ?>
