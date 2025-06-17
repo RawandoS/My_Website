@@ -64,13 +64,6 @@
             </nav>
         </header>
         <center><div id="mainHub">
-            <?php
-                if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == true){
-                    echo '<a href="admin.php" target="_self">
-                        <button>To database control</button>
-                    </a>';
-                }
-            ?>
             <div id="gridB">
                 <table id="example" class="display">
                     <thead>
@@ -107,6 +100,13 @@
             </div>
         </div></center>
         <footer>
+            <?php
+                if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == true){
+                    echo '<a href="admin.php" target="_self">
+                        <button>To database control</button>
+                    </a>';
+                }
+            ?>
             <form method="post">
                 <input type="submit" name="logout" value="Logout">
             </form>
