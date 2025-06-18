@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (isset($_SESSION["canLog"]) && $_SESSION["canLog"] == false) {
+    if (isset($_SESSION["canLog"]) && $_SESSION["canLog"] === false) {
         echo '<script>
                 alert("You are banned from the server");
                 window.location.href = "index.php";
@@ -22,7 +22,7 @@
     }
 
     include("database.php");
-    $sql = "SELECT albumId, title, artists, year, albumTime FROM albums ";
+    $sql = "SELECT * FROM albums ";
     $result = mysqli_query($conn, $sql);
     $data = [];
     if ($result->num_rows > 0) {
@@ -35,6 +35,15 @@
         }
     }
     mysqli_close($conn);
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset( $_POST["row"] )) {
+        $row = json_decode($_POST["row"], true);
+        $row["albumTime"] = ($row["albumTime"] === "N/A") ? "00:00:00": $row["albumTime"];
+        $_SESSION["albumData"] = $row;
+        
+        header("Location: modifyAlbum.php");
+        exit();
+    }
 ?>  
 <!DOCTYPE html>
 <html>
@@ -83,6 +92,7 @@
                             <th>Artists</th>
                             <th>Year</th>
                             <th>Album Time</th>
+                            <th>Modify</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,6 +104,10 @@
                                     <td>{$row['artists']}</td>
                                     <td>{$row['year']}</td>
                                     <td>{$row['albumTime']}</td>
+                                    <td><form action=\"\" method=\"post\">
+                                        <input type=\"hidden\" name=\"row\" value=\"".htmlspecialchars(json_encode($row))."\">
+                                        <input type=\"image\" src=\"images/editButton.png\" alt=\"Submit\">
+                                    </form></td>
                                 </tr>";
                             }
                         ?>
@@ -104,6 +118,7 @@
                             <th>Artists</th>
                             <th>Year</th>
                             <th>Album Time</th>
+                            <th>Modify</th>
                         </tr>
                     </tfoot>
                 </table>

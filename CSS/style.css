@@ -17,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
 header {
@@ -80,11 +81,13 @@ header {
   padding: 25px;
   width: calc(100% - 40px);
   flex: 1;
+  margin: 0 auto 100px;
   margin-bottom: 80px;
   box-sizing: border-box;
   max-width: 1200px;
   margin: 0 auto 80px;
-  min-height: 60vh;
+  min-height: auto;
+  overflow-y: auto;
 }
 
 .leftGrid, .rightGrid {
@@ -98,6 +101,8 @@ header {
   box-sizing: border-box;
   min-height: 0;
   overflow: hidden;
+  max-height: calc(100vh - 250px);
+  overflow-y: auto;
 }
 
 .databaseForm {
@@ -156,21 +161,33 @@ input:hover, button:hover {
   overflow-y: auto;
 }
 
+.center{
+  margin: auto;
+}
+
+.centerGrid{
+  margin: auto;
+  margin-bottom: 100px;
+  overflow-y: scroll
+}
+
 footer {
   background: linear-gradient(135deg, #bc5609, #d28d58);
   color: #a94c2a;
   position: fixed;
   left: 0;
   bottom: 0;
+  height: auto;
+  min-height: 60px;
   width: 100%;
   padding: 15px 20px;
-  margin-top: 20px;
+  margin: auto;
   font-size: large;
   display: flex;
   flex-direction: column;
   align-items: center;
-
   text-align: center;
+  z-index: 10;
 }
 
 a {
@@ -188,4 +205,12 @@ a {
   text-align: center;
   font-size: large;
   font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.cover{
+  display: block;
+  max-width:64px;
+  max-height:64px;
+  width: auto;
+  height: auto;
 }

@@ -113,8 +113,8 @@
         if (!$album) return false;
 
         $sql = mysqli_prepare($conn, 
-            "INSERT INTO albums (albumId, title, artists, year, genres, styles, labels, trackNames, trackTimes, albumTime)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            "INSERT INTO albums (albumId, title, artists, year, genres, styles, labels, trackNames, trackTimes, albumTime, albumCoverPath)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         );
 
         if (!$sql) {
@@ -186,10 +186,12 @@
         $second = $totSeconds %60;
         $albumTime = sprintf("%02d:%02d:%02d", $hour, $minute, $second);
 
+        $albumCoverPath = "covers/{$title}.jpg";
+
         mysqli_stmt_bind_param(
             $sql, 
-            'sssissssss', 
-            $albumId, $title, $artistStr, $year, $genresStr, $stylesStr, $labelsStr, $trackNamesStr, $trackTimeStr, $albumTime
+            'sssisssssss', 
+            $albumId, $title, $artistStr, $year, $genresStr, $stylesStr, $labelsStr, $trackNamesStr, $trackTimeStr, $albumTime, $albumCoverPath
         );
 
         try {
@@ -237,6 +239,39 @@
         }catch(mysqli_sql_exception $e) {
             echo "Album not found:". $e->getMessage();
             return false;
+        }
+    }
+
+    function updateAlbumValues(array $row): bool {
+        include("database.php");
+
+        $sql = mysqli_prepare($conn, 
+            "UPDATE albums SET 
+                    title = ?,
+                    artists = ?, 
+                    year = ?, 
+                    genres = ?,
+                    styles = ?, 
+                    labels = ?, 
+                    trackNames = ?, 
+                    trackTimes = ?, 
+                    albumTime = ?
+                    WHERE albumId = ?"
+        );
+        mysqli_stmt_bind_param(
+            $sql, 
+            'ssisssssss',
+             $row["title"], $row["artists"], $row["year"], $row["genres"], $row["styles"], $row["labels"], $row["trackNames"], $row["trackTimes"], $row["albumTime"], $row["albumId"]
+        );
+
+        try {
+            mysqli_stmt_execute($sql);
+            return true;
+        } catch(mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        } finally {
+            mysqli_stmt_close($sql);
         }
     }
 
