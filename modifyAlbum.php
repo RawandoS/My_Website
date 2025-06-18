@@ -38,9 +38,14 @@
                 <h2>MODIFY ALBUM</h2>
             </div>
             <nav class="navbar">
-                <div class="center">
+                <div class="leftNav">
                     <a href="home.php" target="_self">
                         <button>Home</button>
+                    </a>
+                </div>
+                <div class="rightNav">
+                    <a href="coverShow.php" target="_self">
+                        <button>Album Covers</button>
                     </a>
                 </div>
             </nav>

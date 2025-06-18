@@ -1,3 +1,9 @@
+@media (max-width: 1024px) {
+  .gridBigCover {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .centralGrid {
     grid-template-columns: 1fr;
@@ -5,6 +11,18 @@
   
   .leftGrid, .rightGrid {
     min-height: auto;
+  }
+
+  .gridBigCover {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gridBigCover {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -207,6 +225,7 @@ a {
 
 #gridB {
   flex: 1;
+  padding: 0px 5px;
   overflow: hidden;
   display: flex;
   min-height: 0;
@@ -221,37 +240,70 @@ a {
 
 .cover{
   display: block;
-  max-width:64px;
-  max-height:64px;
+  max-width:256px;
+  max-height:256px;
   width: auto;
   height: auto;
 }
 
 .gridBigCover{
-  margin: 0;
   display: grid;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 40px;
+  padding: 40px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
 .album{
-  height: auto;
-  border-width: 2px;
-  border-color: #652d08;
+  background: linear-gradient(135deg, #eeb78c, #ecc3a4);
+  border-radius: 15px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #6c3f0c;
+}
+
+.album:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.album h1 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #4f2d06;
   text-align: center;
-  align-content: center;
+  word-break: break-word;
 }
 
 .album .cover{
+  width: 256px;
+  height: 256px;
+  object-fit: cover;
+  border-radius: 10px;
+  border-width: 0px;
+  background-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.album .cover:hover {
+  transform: scale(1.03);
+}
+
+.album form {
+  all: unset;
+  width: 100%;
   display: flex;
-  height: auto;
-  width: auto;
-  min-height: 128px;
-  min-width: 128px;
-  max-width: 256px;
-  max-height: 256px;
-  border-radius: 8px;
-  object-fit: contain;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 footer {
