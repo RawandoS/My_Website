@@ -182,25 +182,6 @@ input:hover, button:hover {
   text-align: center;
 }
 
-footer {
-  background: linear-gradient(135deg, #bc5609, #d28d58);
-  color: #a94c2a;
-  left: 0;
-  bottom: 0;
-  margin-top: 25px;
-  padding-top: 10px;
-  height: auto;
-  min-height: 60px;
-  width: 100%;
-  font-size: large;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  z-index: 10;
-  flex-shrink: 0;
-}
-
 a {
   text-decoration: none;
   font-size: large;
@@ -244,4 +225,50 @@ a {
   max-height:64px;
   width: auto;
   height: auto;
+}
+
+.gridBigCover{
+  margin: 0;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  box-sizing: border-box;
+}
+
+.album{
+  height: auto;
+  border-width: 2px;
+  border-color: #652d08;
+  text-align: center;
+  align-content: center;
+}
+
+.album .cover{
+  display: flex;
+  height: auto;
+  width: auto;
+  min-height: 128px;
+  min-width: 128px;
+  max-width: 256px;
+  max-height: 256px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+footer {
+  background: linear-gradient(135deg, #bc5609, #d28d58);
+  color: #a94c2a;
+  left: 0;
+  bottom: 0;
+  margin-top: 25px;
+  padding-top: 10px;
+  height: auto;
+  min-height: 60px;
+  width: 100%;
+  font-size: large;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+  flex-shrink: 0;
 }

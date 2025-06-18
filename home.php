@@ -40,6 +40,8 @@
         $row = json_decode($_POST["row"], true);
         $row["albumTime"] = ($row["albumTime"] === "N/A") ? "00:00:00": $row["albumTime"];
         $_SESSION["albumData"] = $row;
+        $_SESSION["isFromHome"] = true;
+
         
         header("Location: modifyAlbum.php");
         exit();
@@ -60,8 +62,8 @@
             </div>
             <nav class="navbar">
                 <div class="leftNav">
-                    <a href="glass.php" target="_self">
-                        <button>Glass Maker</button>
+                    <a href="coverShow.php" target="_self">
+                        <button>Album Covers</button>
                     </a>
                 </div>
                 <div class="center">

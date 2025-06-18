@@ -187,6 +187,8 @@
         $albumTime = sprintf("%02d:%02d:%02d", $hour, $minute, $second);
 
         $albumCoverPath = "covers/{$title}.jpg";
+        //$albumCoverPath = str_replace('/','', $albumCoverPath);
+        $albumCoverPath = preg_replace('/\s+/', '_', $albumCoverPath);
 
         mysqli_stmt_bind_param(
             $sql, 
