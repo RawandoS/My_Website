@@ -223,6 +223,11 @@ a {
   flex-direction: column;
 }
 
+.suggestionBox{
+  text-align: center;
+  padding: 10px;
+}
+
 #gridB {
   flex: 1;
   padding: 0px 5px;

@@ -46,6 +46,16 @@
         header("Location: modifyAlbum.php");
         exit();
     }
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset( $_POST["suggestion"] )) {
+        $suggestionFile = fopen("userSuggestions.txt","a") or die("Unable to open file!");
+        fwrite($suggestionFile, $_POST["suggestion"]."\n");
+        fclose($suggestionFile);
+        echo '<script>
+                alert("Your suggestion has been sent");
+                window.location.href = "home.php";
+            </script>';
+        exit();
+    }
 ?>  
 <!DOCTYPE html>
 <html>
@@ -126,6 +136,15 @@
                         </tfoot>
                     </table>
                 </div>
+            </div>
+        </div>
+        <div id="mainHub">
+            <div class="suggestionBox">
+                <form action="" method="post">
+                    <label id="insert">Make a suggestion to the Admins:</label>
+                    <input type="text" name="suggestion"> <br>
+                    <input type="submit" name="submit" value="Send to Admins">
+                </form>
             </div>
         </div>
         <footer>
