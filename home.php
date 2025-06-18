@@ -82,48 +82,50 @@
                 </div>
             </nav>
         </header>
-        <center><div id="mainHub">
-            <div id="gridB">
-                <table id="example" class="display">
-                    <thead>
-                        <tr>
-                            <th>Album ID</th>
-                            <th>Title</th>
-                            <th>Artists</th>
-                            <th>Year</th>
-                            <th>Album Time</th>
-                            <th>Modify</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            foreach($data as $row){
-                                echo "<tr>
-                                    <td>{$row['albumId']}</td>
-                                    <td>{$row['title']}</td>
-                                    <td>{$row['artists']}</td>
-                                    <td>{$row['year']}</td>
-                                    <td>{$row['albumTime']}</td>
-                                    <td><form action=\"\" method=\"post\">
-                                        <input type=\"hidden\" name=\"row\" value=\"".htmlspecialchars(json_encode($row))."\">
-                                        <input type=\"image\" src=\"images/editButton.png\" alt=\"Submit\">
-                                    </form></td>
-                                </tr>";
-                            }
-                        ?>
-                    <tfoot>
-                        <tr>
-                            <th>Album ID</th>
-                            <th>Title</th>
-                            <th>Artists</th>
-                            <th>Year</th>
-                            <th>Album Time</th>
-                            <th>Modify</th>
-                        </tr>
-                    </tfoot>
-                </table>
+        <div class="wrapper">
+            <div id="mainHub">
+                <div id="gridB">
+                    <table id="example" class="display">
+                        <thead>
+                            <tr>
+                                <th>Album ID</th>
+                                <th>Title</th>
+                                <th>Artists</th>
+                                <th>Year</th>
+                                <th>Album Time</th>
+                                <th>Modify</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                foreach($data as $row){
+                                    echo "<tr>
+                                        <td>{$row['albumId']}</td>
+                                        <td>{$row['title']}</td>
+                                        <td>{$row['artists']}</td>
+                                        <td>{$row['year']}</td>
+                                        <td>{$row['albumTime']}</td>
+                                        <td><form action=\"\" method=\"post\">
+                                            <input type=\"hidden\" name=\"row\" value=\"".htmlspecialchars(json_encode($row))."\">
+                                            <input type=\"image\" src=\"images/editButton.png\" alt=\"Submit\">
+                                        </form></td>
+                                    </tr>";
+                                }
+                            ?>
+                        <tfoot>
+                            <tr>
+                                <th>Album ID</th>
+                                <th>Title</th>
+                                <th>Artists</th>
+                                <th>Year</th>
+                                <th>Album Time</th>
+                                <th>Modify</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
-        </div></center>
+        </div>
         <footer>
             <form method="post">
                 <input type="submit" name="logout" value="Logout">
@@ -136,6 +138,7 @@
                 $('#example').DataTable({
                     scrollY: '60vh',
                     scrollCollapse: true,
+                    paging: false,
                     fixedHeader: {
                         footer: true
                     }

@@ -10,10 +10,6 @@
         session_destroy();
        exit();
     }
-    if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
-        header('Location: login.php');
-        exit();
-    }
     if (!isset($_SESSION['isLoggedIn'])) {
         header('Location: login.php');
         exit();
@@ -49,28 +45,49 @@
                 </div>
             </nav>
         </header>
-        <div class="centerGrid  ">
+        <div class="centerGrid">
             <form class="modifyAlbum" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
-                <label>Title:</label>
-                <input type="text" name="title" value="<?php echo $title ?>"><br>
-                <label>Artitsts:</label>
-                <input type="text" name="artists" value="<?php echo $artists ?>"><br>
-                <label>Year:</label>
-                <input type="number" min="1000" max="2100" name="year" value="<?php echo $year ?>"><br>
-                <label>Genres:</label>
-                <input type="text" name="genres" value="<?php echo $genres ?>"><br>
-                <label>Styles:</label>
-                <input type="text" name="styles" value="<?php echo $styles ?>"><br>
-                <label>Labels:</label>
+                <p>
+                    <label>Title:</label>
+                    <input type="text" name="title" value="<?php echo $title ?>"><br>
+                </p>
+                <p>
+                    <label>Artitsts:</label>
+                    <input type="text" name="artists" value="<?php echo $artists ?>"><br>
+                </p>
+                <p>
+                    <label>Year:</label>
+                    <input type="number" min="1000" max="2100" name="year" value="<?php echo $year ?>"><br>
+                </p>
+                <p>
+                    <label>Genres:</label>
+                    <input type="text" name="genres" value="<?php echo $genres ?>"><br>
+                </p>
+                <p>
+                    <label>Styles:</label>
+                    <input type="text" name="styles" value="<?php echo $styles ?>"><br>
+                </p>
+                <p>
+                    <label>Labels:</label>
                 <input type="text" name="labels" value="<?php echo $labels ?>"><br>
-                <label>Track Names:</label>
-                <input type="text" name="trackNames" value="<?php echo $trackNames ?>"><br>
-                <label>Track Times:</label>
-                <input type="text" name="trackTimes" value="<?php echo $trackTimes ?>"><br>
-                <label>Album Lenght:</label>
-                <input type="text" name="albumTime" value="<?php echo $albumTime ?>"><br>
-                <input type="file" name="uploadFile"><br>
-                <input type="submit" name="submit" value="Modify Album">
+                </p>
+                <p>
+                    <label>Track Names:</label>
+                    <input type="text" name="trackNames" value="<?php echo $trackNames ?>"><br>
+                </p>
+                <p>
+                    <label>Track Times:</label>
+                    <input type="text" name="trackTimes" value="<?php echo $trackTimes ?>"><br>
+                </p>
+                <p>
+                    <label>Album Lenght:</label>
+                    <input type="text" name="albumTime" value="<?php echo $albumTime ?>"><br>
+                </p>
+                <p>
+                    <label>Image: </label>
+                    <input type="file" name="uploadFile"><br>
+                </p>
+                <input class="inputCenter" type="submit" name="submit" value="Modify Album">
             </form>
             <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])){

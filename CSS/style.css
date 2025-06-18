@@ -18,6 +18,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   position: relative;
+  height: 100%;
 }
 
 header {
@@ -145,19 +146,15 @@ input:hover, button:hover {
   color: #fff;
 }
 
-#gridB {
-  margin: 8px;
-  overflow: auto;
-  max-height: calc(100vh - 265px);
-  margin-bottom: 20px;
-  position: relative;
-}
-
 .dataTables_wrapper {
-  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .dataTables_scrollBody {
+  flex: 1;
+  overflow: auto;
   overflow-y: auto;
 }
 
@@ -167,27 +164,41 @@ input:hover, button:hover {
 
 .centerGrid{
   margin: auto;
-  margin-bottom: 100px;
-  overflow-y: scroll
+  text-align: center;
+}
+
+.modifyAlbum{
+  display: table;
+}
+
+.modifyAlbum p{
+  display: table-row;
+}
+
+.modifyAlbum label, .modifyAlbum input{
+  display: table-cell;
+}
+.modifyAlbum .inputCenter{
+  text-align: center;
 }
 
 footer {
   background: linear-gradient(135deg, #bc5609, #d28d58);
   color: #a94c2a;
-  position: fixed;
   left: 0;
   bottom: 0;
+  margin-top: 25px;
+  padding-top: 10px;
   height: auto;
   min-height: 60px;
   width: 100%;
-  padding: 15px 20px;
-  margin: auto;
   font-size: large;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   z-index: 10;
+  flex-shrink: 0;
 }
 
 a {
@@ -195,10 +206,30 @@ a {
   font-size: large;
 }
 
+.wrapper{
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+}
+
 #mainHub {
+  flex: 1;
   margin: 8px 20px;
   border: 5px solid #652d08;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#gridB {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
 }
 
 #echos {

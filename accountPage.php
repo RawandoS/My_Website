@@ -44,7 +44,7 @@
                 </div>
             </nav>
         </header>
-        <center>
+        <div class="centerGrid">
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                 <label>Old password:</label><br>
                 <input type="password" name="oldPassword"><br>
@@ -93,8 +93,7 @@
                     }
                 }
             ?>
-        </center>
-        
+        </div>
         <footer>
             <form method="post">
                 <input type="submit" name="logout" value="Logout">
