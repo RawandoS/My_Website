@@ -14,6 +14,12 @@
         header('Location: login.php');
         exit();
     }
+    if (isset($_POST["logout"])){
+        $_SESSION['username'] = "";
+        $_SESSION['isLoggedIn'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
 
     include("database.php");
     $sql = "SELECT * FROM albums ";

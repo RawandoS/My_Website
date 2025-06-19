@@ -14,6 +14,12 @@
         session_destroy();
         exit();
     }
+    if (isset($_POST["logout"])){
+        $_SESSION['username'] = "";
+        $_SESSION['isLoggedIn'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
     include("albumDatabase.php");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["rowCount"])){
@@ -136,7 +142,9 @@
             </div>
         </div>
         <footer>
-            
+            <form method="post">
+                <input type="submit" name="logout" value="Logout">
+            </form>
         </footer>
     </body>
 </html>

@@ -94,7 +94,7 @@
                     <label for="fileInput">
                         <img class="uploadImg" src="<?php echo $albumCoverPath ;?>" style="pointer-events: none">
                     </label>
-                    <input type="file" id="fileInput"><br>
+                    <input type="file" id="fileInput" name="fileInput"><br>
                 </p>
                 <input class="inputCenter" type="submit" name="submit" value="Modify Album">
             </form>
@@ -104,17 +104,24 @@
                     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
                     $check = true;
-                    //TODO: betetr file control 
-                    if (empty($_FILES["uploadFile"]["tmp_name"])){
-                        $_FILES["uploadFile"]["tmp_name"] = "images\defaultVinyl.png";
+                    
+                    if (empty($_FILES["fileInput"]["tmp_name"])) {
+                        $uploadFile = [
+                            'tmp_name' => "images/defaultVinyl.png",
+                            'size' => filesize("images/defaultVinyl.png"),
+                            'error' => 0
+                        ];
+                        $targetFile = "images/defaultVinyl.png";
+                    } else {
+                        $uploadFile = $_FILES["fileInput"];
                     }
                     try{
-                        $check = getimagesize($_FILES["uploadFile"]["tmp_name"]);
+                        $check = getimagesize($uploadFile["tmp_name"]);
                         if (!$check){
                             echo '<script>alert("File in not an image")</script>';
                             exit();
                         }else{
-                            if ($_FILES["uploadFile"]["size"] > 500000) {
+                            if ($uploadFile["size"] > 500000) {
                                 echo '<script>alert("File is too large")</script>';
                                 exit();
                             }
@@ -123,35 +130,37 @@
                                 exit();
                             }
                             $targetFile = preg_replace('/\s+/', '_', $targetFile);
-                            if (move_uploaded_file($_FILES['uploadFile']['tmp_name'],$targetFile)){
-                                $row = $_POST;
-                                $row['albumId'] = $_SESSION["albumData"]['albumId'];
-                                include("albumDatabase.php");
-                                $check = updateAlbumValues($row);
-                                if (!$check){
-                                    echo '<script>alert("Database was not updated")</script>';
+                            if ($targetFile !== "images/defaultVinyl.png") {
+                                if (move_uploaded_file($uploadFile['tmp_name'],$targetFile)){
+                                    $row = $_POST;
+                                    $row['albumId'] = $_SESSION["albumData"]['albumId'];
+                                    include("albumDatabase.php");
+                                    $check = updateAlbumValues($row);
+                                    if (!$check){
+                                        echo '<script>alert("Database was not updated")</script>';
+                                    }
+                                    if ($_SESSION["isFromHome"] === true){
+                                        echo '<script>
+                                            alert("The changes were successfull");
+                                            window.location.href = "home.php";
+                                        </script>';
+                                        exit();
+                                    }elseif ($_SESSION["isFromHome"] === false){
+                                        echo '<script>
+                                            alert("The changes were successfull");
+                                            window.location.href = "coverShow.php";
+                                        </script>';
+                                        exit();
+                                    }else{
+                                        echo '<script>alert("Where did you come from")</script>';
+                                        header('Location:home.php');
+                                        exit();
+                                    }
+                                    
+                                }else {
+                                    echo '<script>alert("The file has not been uploaded")</script>';
+                                    exit();
                                 }
-                                if ($_SESSION["isFromHome"] === true){
-                                    echo '<script>
-                                        alert("The changes were successfull");
-                                        window.location.href = "home.php";
-                                    </script>';
-                                    exit();
-                                }elseif ($_SESSION["isFromHome"] === false){
-                                    echo '<script>
-                                        alert("The changes were successfull");
-                                        window.location.href = "coverShow.php";
-                                    </script>';
-                                    exit();
-                                }else{
-                                    echo '<script>alert("Where did you come from")</script>';
-                                    header('Location:home.php');
-                                    exit();
-                                }
-                                
-                            }else {
-                                echo '<script>alert("The file has not been uploaded")</script>';
-                                exit();
                             }
                         }
                     }catch(Exception $e){
