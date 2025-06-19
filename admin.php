@@ -15,6 +15,18 @@
         exit();
     }
     include("albumDatabase.php");
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["rowCount"])){
+        $rowToCancel = $_POST["rowCount"];
+        $suggetsionFile = file_get_contents('userSuggestions.txt');
+        $suggetsionFile = explode("\n", $suggetsionFile);
+        $suggetsionFile = array_map('trim', $suggetsionFile);
+        $suggetsionFile = array_filter($suggetsionFile);
+        unset($suggetsionFile[$rowToCancel]);
+        $newLines = implode(PHP_EOL, $suggetsionFile);
+
+        file_put_contents("userSuggestions.txt", $newLines);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,12 +100,43 @@
                             exit();
                         }
                         printAlbumFromDatabase($albumID);
-                        $_POST ["albumID"] = "";
+                        $_POST["albumID"] = "";
                     }
                 ?>
         </div>
+        <div class="suggestionGrid" >
+            <h3>User suggestion:</h3>
+            <div class="suggestionDiv">
+                <?php
+                    $check = true;
+                    if (filesize("userSuggestions.txt") == 0) {
+                        echo "<h3>No suggestion in the box</h3>";
+                        $check = false;
+                    }
+                    if ($check) {
+                        $rowCount = 0;
+                        $suggetsionFile = fopen("userSuggestions.txt","r+") or die("Unable to open file!");
+                        while (!feof($suggetsionFile)) {
+                            $line = fgets($suggetsionFile);
+                            if (empty($line)) {
+                                continue;
+                            }
+                            echo "<article class=\"suggestion\">
+                                <form action=\"\" method=\"post\">
+                                    <p><strong>".htmlspecialchars($line)."</strong></p>
+                                    <input type=\"hidden\" name=\"rowCount\" value=".$rowCount.">
+                                    <input type=\"submit\" name=\"submit\" value=\"\">
+                                </form>
+                            </article>";
+                            $rowCount++;
+                        }
+                    fclose($suggetsionFile);
+                    }
+                ?>
+            </div>
+        </div>
         <footer>
-
+            
         </footer>
     </body>
 </html>

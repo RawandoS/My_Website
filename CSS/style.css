@@ -2,6 +2,11 @@
   .gridBigCover {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
+
+  .suggestionDiv {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -17,6 +22,15 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
+  }
+
+  .suggestionDiv {
+    grid-template-columns: 1fr; /* 1 column on mobile */
+  }
+  
+  .suggestionGrid {
+    margin: 0 15px;
+    padding: 15px;
   }
 }
 
@@ -100,11 +114,10 @@ header {
   padding: 25px;
   width: calc(100% - 40px);
   flex: 1;
-  margin: 0 auto 100px;
-  margin-bottom: 80px;
+  margin: 0 auto 50px;
+  margin-bottom: 40px;
   box-sizing: border-box;
   max-width: 1200px;
-  margin: 0 auto 80px;
   min-height: auto;
   overflow-y: auto;
 }
@@ -122,6 +135,76 @@ header {
   overflow: hidden;
   max-height: calc(100vh - 250px);
   overflow-y: auto;
+}
+
+.suggestionGrid{
+  background: linear-gradient(135deg, #eeb78c, #ecc3a4);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 0px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  box-sizing: border-box;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.suggestionDiv{
+  margin-left: 20px;
+  float: right;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin: 20px 0;
+  padding: 0;
+}
+
+.suggestion{
+  background: linear-gradient(135deg, #bc5609, #d28d58);
+  border: 2px solid #6c3f0c;
+  border-radius: 8px;
+  padding: 15px;
+  position: relative;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+suggestion p {
+  margin: 0;
+  font-size: 1.1em;
+  word-break: break-word;
+}
+
+.suggestion form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.suggestion input[type="submit"] {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234f2d06"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>') no-repeat center center;
+  background-size: 20px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.suggestion input[type="submit"]:hover {
+  background-color: transparent;
+  transform: scale(1.1);
+}
+
+.suggestionGrid h3 {
+  margin: 0 0 20px 0;
+  text-align: center;
+  font-size: 1.5em;
+  color: #4f2d06;
+  width: 100%;
 }
 
 .databaseForm {
