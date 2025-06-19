@@ -15,15 +15,6 @@
         exit();
     }
 
-    $title = isset($_POST['title']) ? $_POST['title'] : $_SESSION["albumData"]["title"];
-    $artists = isset($_POST['artists']) ? $_POST['artists'] : $_SESSION["albumData"]["artists"];
-    $year = isset($_POST['year']) ? $_POST['year'] : $_SESSION["albumData"]["year"];
-    $genres = isset($_POST['genres']) ? $_POST['genres'] : $_SESSION["albumData"]["genres"];
-    $styles = isset($_POST['styles']) ? $_POST['styles'] : $_SESSION["albumData"]["styles"];
-    $labels = isset($_POST['labels']) ? $_POST['labels'] : $_SESSION["albumData"]["labels"];
-    $trackNames = isset($_POST['trackNames']) ? $_POST['trackNames'] : $_SESSION["albumData"]["trackNames"];
-    $trackTimes = isset($_POST['trackTimes']) ? $_POST['trackTimes'] : $_SESSION["albumData"]["trackTimes"];
-    $albumTime = isset($_POST['albumTime']) ? $_POST['albumTime'] : $_SESSION["albumData"]["albumTime"];
     $albumCoverPath = (file_exists($_SESSION["albumData"]["albumCoverPath"])) ? "{$_SESSION["albumData"]["albumCoverPath"]}" : "images/defaultVinyl.png";
 ?>  
 <!DOCTYPE html>
@@ -54,40 +45,39 @@
         <div class="centerGrid">
             <form class="modifyAlbum" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
                 <p>
-                    <label>Title:</label>
-                    <input type="text" name="title" value="<?php echo $title ?>"><br>
+                    <label>Title:</label>                    <input type="text" name="title" value="<?php echo $_SESSION["albumData"]["title"] ?>"><br>
                 </p>
                 <p>
                     <label>Artitsts:</label>
-                    <input type="text" name="artists" value="<?php echo $artists ?>"><br>
+                    <input type="text" name="artists" value="<?php echo $_SESSION["albumData"]["artists"] ?>"><br>
                 </p>
                 <p>
                     <label>Year:</label>
-                    <input type="number" min="1000" max="2100" name="year" value="<?php echo $year ?>"><br>
+                    <input type="number" min="1000" max="2100" name="year" value="<?php echo $_SESSION["albumData"]["year"] ?>"><br>
                 </p>
                 <p>
                     <label>Genres:</label>
-                    <input type="text" name="genres" value="<?php echo $genres ?>"><br>
+                    <input type="text" name="genres" value="<?php echo $_SESSION["albumData"]["genres"] ?>"><br>
                 </p>
                 <p>
                     <label>Styles:</label>
-                    <input type="text" name="styles" value="<?php echo $styles ?>"><br>
+                    <input type="text" name="styles" value="<?php echo $_SESSION["albumData"]["styles"] ?>"><br>
                 </p>
                 <p>
                     <label>Labels:</label>
-                <input type="text" name="labels" value="<?php echo $labels ?>"><br>
+                <input type="text" name="labels" value="<?php echo $_SESSION["albumData"]["labels"] ?>"><br>
                 </p>
                 <p>
                     <label>Track Names:</label>
-                    <input type="text" name="trackNames" value="<?php echo $trackNames ?>"><br>
+                    <input type="text" name="trackNames" value="<?php echo $_SESSION["albumData"]["trackNames"] ?>"><br>
                 </p>
                 <p>
                     <label>Track Times:</label>
-                    <input type="text" name="trackTimes" value="<?php echo $trackTimes ?>"><br>
+                    <input type="text" name="trackTimes" value="<?php echo $_SESSION["albumData"]["trackTimes"] ?>"><br>
                 </p>
                 <p>
                     <label>Album Lenght:</label>
-                    <input type="text" name="albumTime" value="<?php echo $albumTime ?>"><br>
+                    <input type="text" name="albumTime" value="<?php echo $_SESSION["albumData"]["albumTime"] ?>"><br>
                 </p>
                 <p class="imageUpload">
                     <label class="centerLabel" >Image:</label>
