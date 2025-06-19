@@ -24,7 +24,8 @@
     $trackNames = isset($_POST['trackNames']) ? $_POST['trackNames'] : $_SESSION["albumData"]["trackNames"];
     $trackTimes = isset($_POST['trackTimes']) ? $_POST['trackTimes'] : $_SESSION["albumData"]["trackTimes"];
     $albumTime = isset($_POST['albumTime']) ? $_POST['albumTime'] : $_SESSION["albumData"]["albumTime"];
-?>
+    $albumCoverPath = (file_exists($_SESSION["albumData"]["albumCoverPath"])) ? "{$_SESSION["albumData"]["albumCoverPath"]}" : "images/defaultVinyl.png";
+?>  
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -88,9 +89,12 @@
                     <label>Album Lenght:</label>
                     <input type="text" name="albumTime" value="<?php echo $albumTime ?>"><br>
                 </p>
-                <p>
-                    <label>Image: </label>
-                    <input type="file" name="uploadFile"><br>
+                <p class="imageUpload">
+                    <label class="centerLabel" >Image:</label>
+                    <label for="fileInput">
+                        <img class="uploadImg" src="<?php echo $albumCoverPath ;?>" style="pointer-events: none">
+                    </label>
+                    <input type="file" id="fileInput"><br>
                 </p>
                 <input class="inputCenter" type="submit" name="submit" value="Modify Album">
             </form>

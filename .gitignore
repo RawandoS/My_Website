@@ -3,3 +3,6 @@ keys.php
 
 #database covers
 covers/*
+
+#txt
+userSuggestions.txt

@@ -311,6 +311,28 @@ a {
   gap: 15px;
 }
 
+.imageUpload > input {
+  visibility:hidden;
+  width:0;
+  height:0
+}
+
+.imageUpload .centerLabel{
+  margin: auto;
+  transform: translateY(-35%);
+}
+
+.uploadImg {
+  align-self: center;
+  display: block;
+  border-radius: 8px;
+  max-width:64px;
+  max-height:64px;
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+
 footer {
   background: linear-gradient(135deg, #bc5609, #d28d58);
   color: #a94c2a;
