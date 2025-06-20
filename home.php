@@ -47,14 +47,38 @@
         exit();
     }
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset( $_POST["suggestion"] )) {
-        $suggestionFile = fopen("userSuggestions.txt","a") or die("Unable to open file!");
-        fwrite($suggestionFile, $_POST["suggestion"]."\n");
-        fclose($suggestionFile);
-        echo '<script>
-                alert("Your suggestion has been sent");
-                window.location.href = "home.php";
-            </script>';
-        exit();
+        $suggestion = $_POST["suggestion"];
+
+        try {
+            $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
+        }catch(mysqli_sql_exception $e) {
+            echo "You're not connected";
+        }
+
+        $sql = mysqli_prepare($conn,
+                "INSERT INTO suggestions (suggestion)
+                VALUES (?)"
+        );
+
+        mysqli_stmt_bind_param(
+            $sql,
+            's',
+            $suggestion
+        );
+
+        try {
+            mysqli_stmt_execute($sql);
+        } catch(mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage();
+        } finally {
+            mysqli_stmt_close($sql);
+
+            echo '<script>
+                    alert("Your suggestion has been sent");
+                    window.location.href = "home.php";
+                </script>';
+            exit();
+        }
     }
 ?>  
 <!DOCTYPE html>

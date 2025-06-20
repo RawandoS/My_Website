@@ -403,15 +403,15 @@ a {
 
 .imageUpload .centerLabel{
   margin: auto;
-  transform: translateY(-35%);
+  transform: translateY(-40%);
 }
 
 .uploadImg {
   align-self: center;
   display: block;
   border-radius: 8px;
-  max-width:64px;
-  max-height:64px;
+  max-width:128px;
+  max-height:128px;
   width: auto;
   height: auto;
   margin: auto;

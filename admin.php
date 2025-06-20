@@ -1,5 +1,52 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     session_start();
+
+    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        header('Content-Type: application/json');
+        
+        try {
+            if (!isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
+                throw new Exception('Unauthorized access');
+            }
+
+            if (!isset($_POST["suggestionId"])) {
+                throw new Exception('No suggestion ID provided');
+            }
+
+            $id = (int)$_POST["suggestionId"];
+            include("database.php");
+
+            $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
+            if (!$conn) {
+                throw new Exception("Database connection failed");
+            }
+
+            $sql = mysqli_prepare($conn, 
+            "DELETE FROM suggestions 
+                    WHERE id = ?"
+            );
+            mysqli_stmt_bind_param(
+            $sql,
+            'i',
+            $id
+            );
+            mysqli_stmt_execute($sql);
+
+            if (mysqli_stmt_num_rows($sql) > 0) {
+                throw new Exception('Id may not exists');
+            }
+
+            echo json_encode(["success" => true, "id" => $id, "message" => "processed id: $id"]);
+            exit();
+
+        } catch (Exception $e) {
+            echo json_encode(["success" => false, "message" => "Error: ". $e->getMessage()]);
+            exit();
+        }
+    }
+
     if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
         header('Location: login.php');
         exit();
@@ -20,19 +67,19 @@
         session_destroy();
         header('Location: index.php');
     }
-    include("albumDatabase.php");
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["rowCount"])){
-        $rowToCancel = $_POST["rowCount"];
-        $suggetsionFile = file_get_contents('userSuggestions.txt');
-        $suggetsionFile = explode("\n", $suggetsionFile);
-        $suggetsionFile = array_map('trim', $suggetsionFile);
-        $suggetsionFile = array_filter($suggetsionFile);
-        unset($suggetsionFile[$rowToCancel]);
-        $newLines = implode(PHP_EOL, $suggetsionFile);
-
-        file_put_contents("userSuggestions.txt", $newLines);
+    
+    include("database.php");
+    $sql = "SELECT * FROM suggestions";
+    $result = mysqli_query($conn, $sql);
+    $data = [];
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
     }
+    mysqli_close($conn);
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,29 +161,14 @@
             <h3>User suggestion:</h3>
             <div class="suggestionDiv">
                 <?php
-                    $check = true;
-                    if (filesize("userSuggestions.txt") == 0) {
-                        echo "<h3>No suggestion in the box</h3>";
-                        $check = false;
-                    }
-                    if ($check) {
-                        $rowCount = 0;
-                        $suggetsionFile = fopen("userSuggestions.txt","r+") or die("Unable to open file!");
-                        while (!feof($suggetsionFile)) {
-                            $line = fgets($suggetsionFile);
-                            if (empty($line)) {
-                                continue;
-                            }
-                            echo "<article class=\"suggestion\">
-                                <form action=\"\" method=\"post\">
-                                    <p><strong>".htmlspecialchars($line)."</strong></p>
-                                    <input type=\"hidden\" name=\"rowCount\" value=".$rowCount.">
-                                    <input type=\"submit\" name=\"submit\" value=\"\">
+                    foreach($data as $row){
+                        echo "<article class=\"suggestion\">
+                                <div class=\"suggestionBox\">
+                                    <p><strong>".htmlspecialchars($row["suggestion"])."</strong></p>
+                                    <input type=\"hidden\" name=\"id\" value=".$row["id"].">
+                                    <button type=\"button\" class=\"deleteBtn\">Delete</button>
                                 </form>
                             </article>";
-                            $rowCount++;
-                        }
-                    fclose($suggetsionFile);
                     }
                 ?>
             </div>
@@ -146,5 +178,7 @@
                 <input type="submit" name="logout" value="Logout">
             </form>
         </footer>
+        <script src="JS\suggestion.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </body>
 </html>

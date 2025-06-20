@@ -3,6 +3,7 @@
     $db_user = "root";
     $db_pass = "";
     $db_name = "usersdatabase";
+    /** @var \mysqli $conn */
     $conn = "";
 
     try {
