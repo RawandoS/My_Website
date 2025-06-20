@@ -3,6 +3,7 @@ keys.php
 
 #database covers
 covers/*
+icons/*
 
 #txt
 userSuggestions.txt

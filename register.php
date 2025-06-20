@@ -11,20 +11,29 @@
                                  FILTER_SANITIZE_SPECIAL_CHARS);    
         $password = filter_input(INPUT_POST,"password",
                                 FILTER_SANITIZE_SPECIAL_CHARS);
+        $gender = $_POST["gender"];
+        $date = $_POST["birthDate"];
         
         if (empty($username)) {
             echo '<script>alert("Please enter the username")</script>';
         }
         elseif (empty($password)) {
             echo '<script>alert("Please enter the password")</script>';
-        }else{
+        }elseif (empty($gender)){
+            echo '<script>alert("Please enter your gender")</script>';
+        }elseif (empty($date)) {
+            echo '<script>alert("Please enter the date")</script>';
+        }
+        else{
             $username = trim($username);
             $password = trim($password);
             
             $password = password_hash($password, PASSWORD_DEFAULT);
+            
+            $iconPath = "icons/".$username.".jpg";
 
-            $sql = "INSERT INTO users (user, password)
-                    VALUES ('$username', '$password')";
+            $sql = "INSERT INTO users (user, password, gender, birthDate, iconPath)
+                    VALUES ('$username', '$password', '$gender', '$date', '$iconPath')";
             
             try{
                 mysqli_query($conn, $sql);
@@ -71,6 +80,13 @@
                     <input type="text" name="username"><br>
                     <label>Password:</label><br>
                     <input type="password" name="password" minlength="8"><br>
+                    <select name="gender" >
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
+                        <option value="x">idc</option>
+                    </select><br>
+                    <label>Birth Date:</label><br>
+                    <input type="date" name="birthDate">
                     <input type="submit" name="submit" value="Register">
                 </form>
             </center>
