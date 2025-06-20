@@ -56,14 +56,16 @@
         }
 
         $sql = mysqli_prepare($conn,
-                "INSERT INTO suggestions (suggestion)
-                VALUES (?)"
+                "INSERT INTO suggestions (suggestion, timestamp)
+                VALUES (?, ?)"
         );
+
+        $timestamp = date("Y-m-d H:i:sa");
 
         mysqli_stmt_bind_param(
             $sql,
-            's',
-            $suggestion
+            'ss',
+            $suggestion, $timestamp
         );
 
         try {

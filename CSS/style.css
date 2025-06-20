@@ -376,7 +376,7 @@ a {
   width: 256px;
   height: 256px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 15px;
   border-width: 0px;
   background-color: transparent;
   transition: transform 0.3s ease;
