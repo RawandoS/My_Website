@@ -81,7 +81,21 @@
                     $imgPath = preg_replace('/\s+/', '_', $imgPath)
                     ?>
                         <article class="album">
-                        <h1><?php echo $row["title"] ?></h1>
+                        <h1><?php
+                            if (str_word_count($row['title']) <= 6) {
+                                echo $row["title"];
+                            } else{
+                                $token = strtok($row["title"], ' ');
+                                $title = "";
+                                $counter = 0;
+                                while($counter <= 6) {
+                                    $title .= $token." ";
+                                    $token = strtok(' ');
+                                    $counter++;
+                                }
+                                echo $title."...";
+                            }
+                        ?></h1>
                         <form action="" method="post">
                             <input type="hidden" name="row" value="<?php echo htmlspecialchars(json_encode($row))?>">
                             <input class="cover" type="image" src="<?php echo $imgPath?>" alt="No image found">
