@@ -379,11 +379,11 @@ a {
   border-radius: 15px;
   border-width: 0px;
   background-color: transparent;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
 .album .cover:hover {
-  transform: scale(1.03);
+  transform: scale(1.10);
 }
 
 .album form {
@@ -393,6 +393,41 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 15px;
+}
+
+.pagination{
+  text-align: center;
+}
+
+.pagination a{
+  display: inline-block;
+  text-decoration: none;
+  color: #4f2d06;
+  padding: 10px 20px;
+  border:medium solid #652d08;
+  transition: all 0.3s;
+  font-size: 18px;
+}
+ 
+.pagination a.active{
+  background-color: #bc5609;
+  color: #fff;
+}
+.pageInfo{
+  margin-top: 10px;
+  margin-left: 5%;
+  font-size: 18px;
+  font-weight: bold;
+}
+ 
+.pagination{
+  margin-top: 20px;
+}
+.content p{
+  margin-bottom: 15px;
+}
+.pageNumbers{
+  display: inline-block;
 }
 
 .imageUpload > input {

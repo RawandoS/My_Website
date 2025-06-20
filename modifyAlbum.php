@@ -45,7 +45,8 @@
         <div class="centerGrid">
             <form class="modifyAlbum" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
                 <p>
-                    <label>Title:</label>                    <input type="text" name="title" value="<?php echo $_SESSION["albumData"]["title"] ?>"><br>
+                    <label>Title:</label>                    
+                    <input type="text" name="title" value="<?php echo $_SESSION["albumData"]["title"] ?>"><br>
                 </p>
                 <p>
                     <label>Artitsts:</label>

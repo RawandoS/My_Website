@@ -20,17 +20,7 @@
         session_destroy();
         header('Location: index.php');
     }
-
-    include("database.php");
-    $sql = "SELECT * FROM albums ";
-    $result = mysqli_query($conn, $sql);
-    $data = [];
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $data[] = $row;
-        }
-    }
-    mysqli_close($conn);
+    include("pagination.php");
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset( $_POST["row"] )) {
         $row = json_decode($_POST["row"], true);
@@ -48,7 +38,14 @@
         <title>Albums</title>
         <link rel="stylesheet" href="CSS/style.css" media="screen">
     </head>
-    <body>
+    <?php
+        if (isset($_GET["pageNum"])) {
+            $id = $_GET["pageNum"];
+        } else{
+            $id = 1;
+        }
+    ?>
+    <body id="<?php echo $id; ?>">
         <header>
             <div class="hub">
                 <h2>ALBUM COVERS</h2>
@@ -67,25 +64,75 @@
                     </a>
                 </div>
         </header>
-        <div class="gridBigCover">
+        <div class="pageInfo">
             <?php
-                foreach($data as $row) {
-                    $imgPath = (file_exists("covers/".preg_replace('/\s+/', '_', $row["title"]).".jpg")) ? "{$row["albumCoverPath"]}" : "images/defaultVinyl.png";
-                    $imgPath = preg_replace('/\s+/', '_', $imgPath);
-                    echo "<article class=\"album\">
-                        <h1>".$row["title"]."</h1>
-                        <form action=\"\" method=\"post\">
-                            <input type=\"hidden\" name=\"row\" value=\"".htmlspecialchars(json_encode($row))."\">
-                            <input class=\"cover\" type=\"image\" src=".$imgPath." alt=\"No image found\">
-                        </form>
-                    </article>";
+                if(!isset($_GET["pageNum"])){
+                    $page = 1;
+                }else{
+                    $page = $_GET["pageNum"];
                 }
             ?>
+            <h3>Showing page <?php echo $page; ?> of <?php echo $pages;?></h3>
+        </div>
+        <div class="gridBigCover">
+            <?php
+                while($row = $result->fetch_assoc()){
+                    $imgPath = (file_exists("covers/".preg_replace('/\s+/', '_', $row["title"]).".jpg")) ? "{$row["albumCoverPath"]}" : "images/defaultVinyl.png";
+                    $imgPath = preg_replace('/\s+/', '_', $imgPath)
+                    ?>
+                        <article class="album">
+                        <h1><?php echo $row["title"] ?></h1>
+                        <form action="" method="post">
+                            <input type="hidden" name="row" value="<?php echo htmlspecialchars(json_encode($row))?>">
+                            <input class="cover" type="image" src="<?php echo $imgPath?>" alt="No image found">
+                        </form>
+                    </article>
+                    <?php
+                }
+            ?>
+        </div>
+        <div class="pagination">
+            <a href="?pageNum=1">First</a>
+            
+            <?php
+                if(isset($_GET["pageNum"]) && $_GET["pageNum"] > 1){
+                    echo "<a href=\"?pageNum=".($_GET["pageNum"] - 1)."\">Previus</a>";
+                } else{
+                    echo "<a>Previous</a>";
+                }
+            ?>
+
+            <div class="pageNumbers">
+                <?php
+                    for($i = 1; $i <= $pages; $i++){
+                        echo "<a href=\"?pageNum=".$i."\">".$i."</a>";
+                    }
+                ?>
+            </div>
+
+            <?php
+                if(!isset($_GET["pageNum"])) {
+                    echo "<a href=\"?pageNum=2\">Next</a>";
+                }else{
+                    if(isset($_GET["pageNum"]) && $_GET["pageNum"] < $pages){
+                        echo "<a href=\"?pageNum=".($_GET["pageNum"] + 1)."\">Next</a>";
+                    } else{
+                        echo "<a>Next</a>";
+                    }
+                }
+            ?>
+
+            <a href="?pageNum=<?php echo $pages;?>">Last</a>
         </div>
         <footer>
             <form method="post">
                 <input type="submit" name="logout" value="Logout">
             </form>
         </footer>
+        <script>
+            let links = document.querySelectorAll('.pageNumbers > a');
+            let bodyId = parseInt(document.body.id) - 1;
+            links[bodyId].classList.add("active");
+        </script>
     </body>
 </html>
