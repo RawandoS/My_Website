@@ -117,7 +117,7 @@
                 </form>
                 <?php
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["albumName"])){
-                        
+                        include("albumDatabase.php");
                         $albumName = filter_input(INPUT_POST,"albumName",
                                         FILTER_SANITIZE_SPECIAL_CHARS);
                         if (empty($albumName)) {
