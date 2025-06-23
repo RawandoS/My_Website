@@ -6,7 +6,7 @@ class App{
     private $method = "Index";
     private function splitURL(){
         $URL = $_GET["url"] ?? 'home';
-        $URL = explode("/",$URL);
+        $URL = explode("/",trim($URL,"/"));
         return $URL;
     }
 
@@ -23,7 +23,6 @@ class App{
             $this->controller = "_404";
         }
 
-        
         $controller = new $this->controller;
         call_user_func_array([$controller, $this->method], []);
     }

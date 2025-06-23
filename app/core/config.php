@@ -17,3 +17,10 @@ if ($_SERVER['SERVER_NAME'] == "localhost"){
     
     //define(constant_name: "ROOT","https://www.yourwebsite.com");
 }
+
+define("APP_NAME","My_Website");
+
+/**
+ * if true error are shown, if false errors aren't shown
+ */
+define("DEBUG",true);

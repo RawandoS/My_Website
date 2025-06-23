@@ -5,3 +5,7 @@ function show($URL){
     print_r($URL);
     echo"</pre>";
 }
+
+function esc($str) {
+    return htmlspecialchars($str);
+}
