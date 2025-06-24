@@ -9,6 +9,7 @@
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet" />
         <meta name="theme-color" content="#712cf9" />
         <link href="headers.css" rel="stylesheet" />
+        <link href="checkout.css" rel="stylesheet" />
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -80,6 +81,23 @@
             .bd-mode-toggle .dropdown-menu .active .bi {
                 display: block !important;
             }
+            .row label{
+                margin-left: 10px;
+            }
+            .needs-validation{
+                width: 50%;
+                margin-left : 40%
+            }
+            .uploadImg {
+                align-self: center;
+                display: block;
+                border-radius: 8px;
+                max-width:128px;
+                max-height:128px;
+                width: auto;
+                height: auto;
+                margin: auto;
+            }
         </style>
     </head>
     <body>
@@ -98,7 +116,91 @@
             </ul>
         </header>
         <main>
-            
+            <div class="py-5 text-center">
+                <img class="d-block mx-auto mb-4" src="http://localhost/public/assets/images/defaultVinyl.png" alt="" width="64" height="64" />
+                <h1 class="h2">Modify Album</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-7 col-lg-8">
+                    <h4 class="mb-3">Album values</h4>
+                    <form class="needs-validation" method="post">
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">Title</label>
+                                <input type="text" class="form-control" name="title" id="title" placeholder="" value="<?php echo $data['title']?>" required />
+                                <div class="invalid-feedback">
+                                    Valid title is required.
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="lastName" class="form-label">Artists</label>
+                                <input type="text" class="form-control" name="artists" id="lastName" placeholder="" value="<?php echo $data['artists']?>" required />
+                                <div class="invalid-feedback">
+                                    Valid last name is required.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="username" class="form-label">Year</label>
+                                <input type="text" class="form-control" min="1000" max="2100" name="year" id="username" placeholder="" value="<?php echo $data['year']?>" required />
+                                <div class="invalid-feedback">
+                                    Your username is required.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Genres</label>
+                                <input type="text" class="form-control" name="genres" id="address" placeholder="" value="<?php echo $data['genres']?>" required />
+                                <div class="invalid-feedback">
+                                    Please enter your shipping address.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Styles</label>
+                                <input type="text" class="form-control" name="styles" id="address" placeholder="" value="<?php echo $data['styles']?>" required />
+                                <div class="invalid-feedback">
+                                    Please enter your shipping address.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Lables</label>
+                                <input type="text" class="form-control" name="labels" id="address" placeholder="" value="<?php echo $data['labels']?>" required />
+                                <div class="invalid-feedback">
+                                    Please enter your shipping address.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Track Names</label>
+                                <input type="text" class="form-control" name="trackNames" id="address" placeholder="" value="<?php echo $data['trackNames']?>" required />
+                                <div class="invalid-feedback">
+                                    Please enter your shipping address.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Track Times</label>
+                                <input type="text" class="form-control" name="trackTimes" id="address" placeholder="" value="<?php echo $data['trackTimes']?>" required />
+                                <div class="invalid-feedback">
+                                    Please enter your shipping address.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Album Lenght</label>
+                                <input type="text" class="form-control" name="albumTime" id="address" placeholder="" value="<?php echo $data['albumTime']?>" required />
+                                <div class="invalid-feedback">
+                                    Please enter your shipping address.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Image</label><br>
+                                <label for="fileInput">
+                                    <img class="uploadImg" src="<?php echo $data['albumCoverPath'];?>" alt="">
+                                </label>
+                                <input type="file" id="fileInput" name="fileInput" style="display: none;">
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <button class="w-100 btn btn-primary btn-lg" type="submit">ModifyAlbum</button>
+                    </form>
+                </div>
+            </div>
         </main>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">
@@ -120,5 +222,7 @@
                 </li>
             </ul>
         </footer>
+        <script src="<?php echo BASE_URL?>/assets/js/bootstrap.bundle.min.js" class="astro-vvvwv3sm"></script>
+        <script src="checkout.js" class="astro-vvvwv3sm"></script>
     </body>
 </html>

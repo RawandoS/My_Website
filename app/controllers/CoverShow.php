@@ -13,7 +13,7 @@ class CoverShow{
             $row = json_decode($_POST["row"], true);
             $row["albumTime"] = ($row["albumTime"] === "N/A") ? "00:00:00": $row["albumTime"];
             $_SESSION["albumData"] = $row;
-            $_SESSION["isFromHome"] = true;
+            $_SESSION["isFromHome"] = false;
 
             redirect("modifyAlbum");
         }

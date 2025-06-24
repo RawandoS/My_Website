@@ -25,9 +25,6 @@ class User{
     public function register($data = []){
         $sql = "INSERT INTO users (user, password, iconPath)
                     VALUES (:user, :password, :iconPath)";
-        echo "<pre>Data being sent to query:";
-        print_r($data);
-        echo "</pre>";
         $result = $this->query($sql, [
             ':user' => $data['user'],
             ':password' => $data['password'],

@@ -3,7 +3,7 @@
 class Login{
     use Controller;
     public function index(){
-        if(isset($_SESSION) && $_SESSION['isLoggedIn'] === true){
+        if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true){
             redirect('main');
         }
         if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -21,7 +21,7 @@ class Login{
                     $_SESSION['isLoggedIn'] = true;
                     $_SESSION['isAdmin'] = $row[0]['isAdmin'];
                     $_SESSION['canLog'] = $row[0]['canLog'];
-                    redirect("home");
+                    redirect("main");
                 }
             }
             
