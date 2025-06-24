@@ -1,13 +1,14 @@
 <?php
 
 if ($_SERVER['SERVER_NAME'] == "localhost"){
-    define("DBANME","usersdatabase");
+    define("DBNAME","usersdatabase");
     define("DBHOST","localhost");
     define("DBUSER","root");
     define("DBPASS","");
     define("DBDRIVER","");
 
-    define("ROOT","http://localhost/public");
+    define("BASE_URL", "http://localhost");
+    define("ROOT", "C:/xampp/htdocs/My_Website");
 }else{
     define("DBANME","usersdatabase");
     define("DBHOST","localhost");

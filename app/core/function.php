@@ -9,3 +9,7 @@ function show($URL){
 function esc($str) {
     return htmlspecialchars($str);
 }
+
+function redirect($path)    {
+    header("Location:".BASE_URL."/".$path);
+}
