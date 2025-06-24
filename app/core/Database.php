@@ -19,4 +19,18 @@ Trait Database{
         }
         return false;
     }
+
+    public function numRows($sql) {
+        $conn = $this->connect();
+        $stmt = $conn->prepare($sql);
+        $check = $stmt->execute();
+        if($check){
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $totRows = count($result);
+            if(is_int($totRows) && $totRows > 0){
+                return $totRows;
+            }
+        }
+        return false;
+    }
 }

@@ -17,13 +17,4 @@ trait Model {
         show($result);
     }
 
-
-
-    public function addAlbumToDB($data = []){
-        //TODO
-    }
-
-    public function updateAlbum($data = []){
-        //TODO
-    }
 }
