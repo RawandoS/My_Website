@@ -122,7 +122,7 @@
                         if(!is_array($row)){
                             continue;
                         }
-                        $imgPath = (file_exists("covers/".preg_replace('/\s+/', '_', $row["title"]).".jpg")) ? "{$row["albumCoverPath"]}" : "images/defaultVinyl.png";
+                        $imgPath = (file_exists(ROOT."/public/assets/images/covers/".preg_replace('/\s+/', '_', $row["title"]).".jpg")) ? "{$row["albumCoverPath"]}" : "http://localhost/public/assets/images/defaultVinyl.png";
                         $imgPath = preg_replace('/\s+/', '_', $imgPath)
                         ?>
                             <article class="album">

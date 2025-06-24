@@ -127,7 +127,7 @@
                                         <td>{$row['albumTime']}</td>
                                         <td><form action=\"\" method=\"post\">
                                             <input type=\"hidden\" name=\"row\" value=\"".htmlspecialchars(json_encode($row))."\">
-                                            <input type=\"image\" src=\"images/editButton.png\" alt=\"Submit\">
+                                            <input type=\"image\" src=\"http://localhost/public/assets/images/editButton.png\" alt=\"Submit\">
                                         </form></td>
                                     </tr>";
                                 }
