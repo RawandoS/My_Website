@@ -12,6 +12,7 @@ class Register{
             $_POST['iconPath'] = "icons/".$_POST['user'].".jpg";
             $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $user = $user->register($_POST);
+            //TODO: error handling
             redirect("login");
         }
         

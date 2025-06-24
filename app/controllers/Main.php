@@ -1,8 +1,9 @@
 <?php
 
-class _404{
+class Main{
     use Controller;
     public function index(){
-        $this->view('_404');
+        
+        $this->view('main');
     }
 }

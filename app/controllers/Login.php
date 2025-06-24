@@ -4,7 +4,7 @@ class Login{
     use Controller;
     public function index(){
         if(isset($_SESSION) && $_SESSION['isLoggedIn'] === true){
-            redirect('home');
+            redirect('main');
         }
         if($_SERVER['REQUEST_METHOD'] == "POST"){
             $user = new User();
