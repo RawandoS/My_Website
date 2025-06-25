@@ -120,8 +120,39 @@
                     <input minlength="8" name="newConfirmPassword" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Confirm New Password</label> 
                 </div>
-                <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button> 
-                <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2025</p>
+                <button class="btn btn-primary w-100 py-2" type="submit">Update password</button> 
+            </form>
+            <hr class="my-4" />
+            <form method="post">
+
+                <?php if(!empty($updateErrors)):?>
+                    <div class="alert alert-danger">
+                        <?php echo implode("<br>", $updateErrors)?>
+                    </div>
+                <?php endif;?>
+
+                <h1 class="h3 mb-3 fw-normal">Update profile</h1>
+                <div class="form-floating">
+                    <input minlength="6" name="user" type="text" value="<?php echo $_SESSION["user"]?>" class="form-control" id="floatingPassword" placeholder="bio">
+                    <label for="floatingPassword">Username</label> 
+                </div>
+                <div class="form-floating">
+                    <select name="gender" class="form-control" id="floatingpassword">
+                        <option value="m" </option>Male</option>
+                        <option value="f">Female</option>
+                        <option value="x">IDC</option>
+                    </select><br>
+                    <label for="floatingPassword">Gender</label>
+                </div>
+                <div class="form-floating">
+                    <input  name="birthDate" type="date" value="<?php echo $_SESSION["birthDate"]?>" class="form-control" id="floatingPassword" placeholder="birthDate">
+                    <label for="floatingPassword">Birth Date</label> 
+                </div>
+                <div class="form-floating">
+                    <input minlength="8" name="bio" type="text" value="<?php echo $_SESSION["bio"]?>" class="form-control" id="floatingPassword" placeholder="bio">
+                    <label for="floatingPassword">My bio</label> 
+                </div>
+                <button class="btn btn-primary w-100 py-2" type="submit">Update profile</button> 
             </form>
             <hr class="my-4" />
             <form method="post">

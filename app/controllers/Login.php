@@ -20,6 +20,9 @@ class Login{
                     $_SESSION['isLoggedIn'] = true;
                     $_SESSION['isAdmin'] = $row[0]['isAdmin'];
                     $_SESSION['canLog'] = $row[0]['canLog'];
+                    $_SESSION['gender'] = $row[0]['gender'];
+                    $_SESSION['birthDate'] = $row[0]['birthDate'];
+                    $_SESSION['bio'] = $row[0]['bio'];
                     redirect("main");
                 }
             }

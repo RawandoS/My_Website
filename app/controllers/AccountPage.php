@@ -2,6 +2,8 @@
 
 class AccountPage{
     use Controller;
+
+    private $updateErrors = [];
     public function index(){
         if(isset($_SESSION["canLog"]) && $_SESSION['canLog'] === false){
             $_SESSION['username'] = "";
@@ -49,8 +51,47 @@ class AccountPage{
             unset($_POST);
             redirect('accountPage');
         }
+
+        if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["gender"])){
+            $newUser = $bio = trim(filter_input(INPUT_POST,'user',
+                                FILTER_SANITIZE_SPECIAL_CHARS));
+            if(empty($newUser)){
+                $this->updateErrors['newUser'] = 'New user is required';
+                redirect('accountPage');
+            }
+            $gender = $_POST['gender'];
+            $birthDate = $_POST['birthDate'];
+            $bio = trim(filter_input(INPUT_POST,'bio',
+                                FILTER_SANITIZE_SPECIAL_CHARS));
+
+            if(time() < strtotime('+14 years', strtotime($birthDate))){
+                echo '<script>alert("You don\'t meet the age requirements")</script>';
+            }
+            
+            if(arrayContainsSameValues($_POST, $_SESSION)){
+                echo '<script>alert("Profile already has this values")</script>';
+                show($_POST);
+
+            }else{
+                $data = $_POST;
+                $data['user'] = $newUser;
+                $data['gender'] = $gender;
+                $data['birthDate'] = $birthDate;
+                $data['bio'] = $bio;
+                $data['userOld'] = $_SESSION['user'];
+                
+                $check = $user->updateAccount($data);
+                if(!$check){
+                    redirect("main");
+                }
+                echo '<script>alert("You have updated the profile")</script>';
+                unset($_POST);
+                redirect('accountPage');
+            }
+        }
         
         $data['errors'] = $user->errors;
+        $data['updateErrors'] = $this->updateErrors; 
         $this->view('accountPage', $data);
     }
 }

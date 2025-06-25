@@ -82,4 +82,32 @@ class User{
         }
         return true;
     }
+
+    /**
+     * This function updates the account record in the database,
+     * changing the username, gender, birth date and biography,
+     * searching it using the old name; it returns true if the 
+     * update was succesfull, else it returns false
+     * @param array $data
+     * @return bool
+     */
+    public function updateAccount($data = []){
+        $sql = "UPDATE users SET 
+                user = :user,
+                gender = :gender,
+                birthDate = :birthDate,
+                bio = :bio
+                WHERE user = :userOld";
+        $result = $this->query($sql,[
+            ":user" => $data["user"],
+            ":gender" => $data["gender"],
+            ":birthDate" => $data["birthDate"],
+            ":bio" => $data["bio"],
+            ":userOld"=> $data["userOld"]
+        ]);
+        if(is_bool($result) && $result == false){
+            return false;
+        }
+        return true;
+    }
 }

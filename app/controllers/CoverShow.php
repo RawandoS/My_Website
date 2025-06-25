@@ -22,7 +22,7 @@ class CoverShow{
         }
         
         $start = 0;
-        $rowPerPage = 15;
+        $rowPerPage = 12;
         $page = 1;
 
         $album = new Album();
