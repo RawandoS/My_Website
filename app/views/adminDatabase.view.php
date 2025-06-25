@@ -82,6 +82,23 @@
             .bd-mode-toggle .dropdown-menu .active .bi {
                 display: block !important;
             }
+            main {
+                min-height: calc(100vh - 112px);
+                overflow: auto;
+            }
+            .flex-grow-1 {
+                flex: 1 1 auto;
+            }
+            .form-narrow {
+                max-width: 500px;
+                width: 100%;
+            }
+            .content-center {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-height: calc(100vh - 112px);
+            }
         </style>
     </head>
     <body>
@@ -99,7 +116,7 @@
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/accountPage" class="nav-link">AccountPage</a></li>
             </ul>
         </header>
-        <main>
+        <main class="d-flex">
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary " style="width: 240px;">
                 <span class="fs-4">Sidebar</span>
                 <hr />
@@ -122,16 +139,17 @@
                 </ul>
                 
             </div>
-            <form method="post">
-                <h1 class="h3 mb-3 fw-normal">Insert Album Name (Artist + Album Name)</h1>
-                <div class="form-floating">
-                    <input name="keyword" type="text" class="form-control" id="floatingInput" placeholder="Marshal Matters">
-                    <label for="floatingInput">keyword</label>
-                </div>
-                
-                <button class="btn btn-primary w-100 py-2" type="submit">Add to database</button> 
-                <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2025</p>
-            </form>
+            <div class="flex-grow-1 d-flex justify-content-center align-items-start p-4">
+                <form method="post" class="w-100" style="max-width: 500px;">
+                    <h1 class="h3 mb-3 fw-normal text-center">Insert Album Name (Artist + Album Name)</h1>
+                    <div class="form-floating mb-3">
+                        <input name="keyword" type="text" class="form-control" id="floatingInput" placeholder="Marshal Matters">
+                        <label for="floatingInput">Keyword</label>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 py-2" type="submit">Add to database</button> 
+                </form>
+            </div>
         </main>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">

@@ -81,6 +81,13 @@
             .bd-mode-toggle .dropdown-menu .active .bi {
                 display: block !important;
             }
+            main {
+                min-height: calc(100vh - 112px);
+                overflow: auto;
+            }
+            .flex-grow-1 {
+                flex: 1 1 auto;
+            }
         </style>
     </head>
     <body>
@@ -98,7 +105,7 @@
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/accountPage" class="nav-link">AccountPage</a></li>
             </ul>
         </header>
-        <main>
+        <main  class="d-flex">
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary " style="width: 240px;">
                 <span class="fs-4">Sidebar</span>
                 <hr />
@@ -119,6 +126,9 @@
                         </a>
                     </li>
                 </ul>
+                
+            </div>
+            <div class="flex-grow-1 p-4">
                 
             </div>
         </main>
