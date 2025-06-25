@@ -9,22 +9,35 @@ class ModifyAlbum{
 
             redirect('home');
         }
+        if(!isset($_SESSION['isFromHome'])){
+            redirect('home');
+        }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            show($_POST);
             $targetFile = ROOT."/public/assets/images/covers/".$_POST["title"].".jpg";
             $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
             $album = new Album();
             $check = true;
             $row = $_POST;
+            unset($row["submit_value"]);
             $row['albumId'] = $_SESSION["albumData"]['albumId'];
+
+            if(arrayContainsSameValues($row, $_SESSION["albumData"])){
+                echo '<script>alert("No album values modification")</script>';
+                $Update = false;
+            }else{
+                echo '<script>alert("Album was modified")</script>';
+                $Update = true;
+            }
 
             if (empty($_FILES["fileInput"]["tmp_name"])) {
                 show($_FILES["fileInput"]);
-                $check = $album->updateAlbumValues($row);
-                if (!$check){
-                    echo '<script>alert("Database was not updated")</script>';
+                if($Update){
+                    $check = $album->updateAlbumValues($row);
+                    if (!$check){
+                        echo '<script>alert("Database was not updated")</script>';
+                    }
                 }
                 if ($_SESSION["isFromHome"] === true){
                     redirect("datatable");
@@ -54,10 +67,13 @@ class ModifyAlbum{
                 }
                 $targetFile = preg_replace('/\s+/', '_', $targetFile);
                 if (move_uploaded_file($uploadFile['tmp_name'],$targetFile)){
-                    $check = $album->updateAlbumValues($row);
-                    if (!$check){
-                        echo '<script>alert("Database was not updated")</script>';
+                    if($Update){
+                        $check = $album->updateAlbumValues($row);
+                        if (!$check){
+                            echo '<script>alert("Database was not updated")</script>';
+                        }
                     }
+                    
                     if ($_SESSION["isFromHome"] === true){
                         redirect("datatable");
                     }elseif ($_SESSION["isFromHome"] === false){

@@ -123,7 +123,7 @@
             <div class="row">
                 <div class="col-md-7 col-lg-8">
                     <h4 class="mb-3">Album values</h4>
-                    <form class="needs-validation" method="post">
+                    <form class="needs-validation" method="post" enctype="multipart/form-data">
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label for="firstName" class="form-label">Title</label>
@@ -191,13 +191,13 @@
                             <div class="col-12">
                                 <label for="address" class="form-label">Image</label><br>
                                 <label for="fileInput">
-                                    <img class="uploadImg" src="<?php echo $data['albumCoverPath'];?>" alt="">
+                                    <img class="uploadImg" src="<?php echo $data['albumCoverPath'];?>" alt="No image found" style="pointer-events: none">
                                 </label>
                                 <input type="file" id="fileInput" name="fileInput" style="display: none;">
                             </div>
                         </div>
                         <hr class="my-4" />
-                        <button class="w-100 btn btn-primary btn-lg" type="submit">ModifyAlbum</button>
+                        <button class="w-100 btn btn-primary btn-lg" type="submit" name="submit value"submit">ModifyAlbum</button>
                     </form>
                 </div>
             </div>

@@ -11,13 +11,18 @@ Trait Database{
         $conn = $this->connect();
         $stmt = $conn->prepare($sql);
         $check = $stmt->execute($data);
-        if($check){
+        if(!$check){
+            return false;
+        }
+
+        if(stripos($sql, 'SELECT') === 0) {
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if(is_array($result) && count($result)){
                 return $result;
             }
+            return false;
         }
-        return false;
+        return true;
     }
 
     public function numRows($sql) {

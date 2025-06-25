@@ -39,21 +39,22 @@ class Album{
                     year = :year, 
                     genres = :genres,
                     styles = :styles, 
-                    labels = :lables, 
+                    labels = :labels, 
                     trackNames = :trackNames, 
                     trackTimes = :trackTimes, 
-                    albumTime = :albumTime,
+                    albumTime = :albumTime
                     WHERE albumId = :albumId";
         $result = $this->query($sql, [
             ':title' => $row['title'],
             ':artists' => $row['artists'],
             ':year' => $row['year'],
             ':genres' => $row['genres'],
+            ':styles' => $row['styles'],
             ':labels' => $row['labels'],
             ':trackNames' => $row['trackNames'],
             ':trackTimes' => $row['trackTimes'],
             ':albumTime' => $row['albumTime'],
-            ':albumId' => $row['albumId'],
+            ':albumId' => $row['albumId']
         ]);
         if(is_bool($result) && $result == false){
             return false;
