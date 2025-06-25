@@ -9,6 +9,7 @@
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet" />
         <meta name="theme-color" content="#712cf9" />
         <link href="headers.css" rel="stylesheet" />
+        <link href="sidebars.css" rel="stylesheet" />
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -89,16 +90,37 @@
             </a>
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/coverShow" class="nav-link" aria-current="page">AlbumCovers</a></li>
-                <li class="nav-item"><a href="<?php echo BASE_URL?>/main" class="nav-link active">Main Page</a></li>
+                <li class="nav-item"><a href="<?php echo BASE_URL?>/main" class="nav-link">Main Page</a></li>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/datatable" class="nav-link">Datatables</a></li>
                 <?php if($_SESSION['isAdmin']): ?>
-                <li class="nav-item"><a href="<?php echo BASE_URL?>/adminDatabase" class="nav-link">Admin</a></li>
+                <li class="nav-item"><a href="<?php echo BASE_URL?>/adminDatabase" class="nav-link active">Admin</a></li>
                 <?php endif;?>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/accountPage" class="nav-link">AccountPage</a></li>
             </ul>
         </header>
         <main>
-            <h1><?php echo $_SESSION['user']?></h1>
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary " style="width: 240px;">
+                <span class="fs-4">Sidebar</span>
+                <hr />
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="<?php echo BASE_URL?>/adminDatabase" class="nav-link link-body-emphasis" aria-current="page">
+                            Database Control
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo BASE_URL?>/adminSuggestion" class="nav-link link-body-emphasis">
+                            Suggestion Box
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo BASE_URL?>/adminUsers" class="nav-link active">
+                            Users
+                        </a>
+                    </li>
+                </ul>
+                
+            </div>
         </main>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">

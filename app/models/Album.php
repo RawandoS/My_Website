@@ -61,4 +61,43 @@ class Album{
         }
         return true;
     }
+
+    public function addAlbumToDatabase($data){
+        $sql = "INSERT INTO albums 
+                (albumId, title, artists, year,
+                genres, styles, labels, trackNames, 
+                trackTimes, albumTime, albumCoverPath)
+                VALUES (:albumId, :title, :artists, :year,
+                :genres, :styles, :labels, :trackNames, 
+                :trackTimes, :albumTime, :albumCoverPath)";
+        $result = $this->query($sql, [
+            ':albumId' => $data['albumId'],
+            ':title' => $data['title'],
+            ':artists' => $data['artists'],
+            ':year' => $data['year'],
+            ':genres' => $data['genres'],
+            ':styles' => $data['styles'],
+            ':labels' => $data['labels'],
+            ':trackNames' => $data['trackNames'],
+            ':trackTimes' => $data['trackTimes'],
+            ':albumTime' => $data['albumTime'],
+            ':albumCoverPath' => $data['albumCoverPath']
+        ]);
+        if(is_bool($result) && $result == false){
+            return false;
+        }
+        return true;
+    }
+
+    public function getAlbumFromDBKeyword($keyword){
+        $sql = "SELECT * FROM albums 
+                WHERE title LIKE '%:title%' LIMIT 1";
+        $result = $this->query($sql, [
+            ':title' => $keyword,
+        ]);
+        if(is_bool($result) && $result == false){
+            return false;
+        }
+        return $result;
+    }
 }

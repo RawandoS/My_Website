@@ -1,2 +1,3 @@
 #covers
 public/assets/images/covers/*
+app/core/Keys.php

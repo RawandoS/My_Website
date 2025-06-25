@@ -94,7 +94,7 @@
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/main" class="nav-link">Main Page</a></li>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/datatable" class="nav-link active">Datatables</a></li>
                 <?php if($_SESSION['isAdmin']): ?>
-                <li class="nav-item"><a href="<?php echo BASE_URL?>/admin" class="nav-link">Admin</a></li>
+                <li class="nav-item"><a href="<?php echo BASE_URL?>/adminDatabase" class="nav-link">Admin</a></li>
                 <?php endif;?>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/accountPage" class="nav-link">AccountPage</a></li>
             </ul>
