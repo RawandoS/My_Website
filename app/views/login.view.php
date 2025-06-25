@@ -75,11 +75,11 @@
             <form method="post">
                 <h1 class="h3 mb-3 fw-normal">Please login</h1>
                 <div class="form-floating">
-                    <input name="user" type="text" class="form-control" id="floatingInput" placeholder="John smith">
+                    <input minlength="4" name="user" type="text" class="form-control" id="floatingInput" placeholder="John smith">
                     <label for="floatingInput">Username</label>
                 </div>
                 <div class="form-floating">
-                    <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input minlength="8" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Password</label> 
                 </div>
                 <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button> 

@@ -13,11 +13,10 @@ class Login{
             
             $row = $user->login($_POST);
             if($row){
-                print_r($row);
                 $password = $row[0]["password"];
                 if(password_verify($_POST['password'], $password)){
                     $_SESSION['user'] = $row[0]['user'];
-                    $_SESSION['passowrd'] = $row[0]['password'];
+                    $_SESSION['password'] = $row[0]['password'];
                     $_SESSION['isLoggedIn'] = true;
                     $_SESSION['isAdmin'] = $row[0]['isAdmin'];
                     $_SESSION['canLog'] = $row[0]['canLog'];

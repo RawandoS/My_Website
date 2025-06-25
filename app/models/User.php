@@ -22,6 +22,28 @@ class User{
         return false;
     }
 
+    public function validatePassword($data){
+        $this->errors = [];
+        
+        if(empty($data['oldPassword'])){
+            $this->errors['password'] = 'Old passowrd is required';
+        }
+        if(empty($data['newPassword'])){
+            $this->errors['newPassword'] = 'New password is required';
+        }
+        if(empty($data['newConfirmPassword'])){
+            $this->errors['newConfirmPassword'] = 'New Confirm password is required';
+        }
+        if($data['newPassword'] != $data['newConfirmPassword']){
+            $this->errors['pass'] = 'New password don\'t match';
+        }
+
+        if(empty($this->errors)){
+            return true;
+        }
+        return false;
+    }
+
     public function register($data = []){
         $sql = "INSERT INTO users (user, password, iconPath)
                     VALUES (:user, :password, :iconPath)";
@@ -46,5 +68,18 @@ class User{
             return false;
         }
         return $result;
+    }
+
+    public function updatePassword($data = []){
+        $sql = "UPDATE users SET password = :password
+                WHERE user = :user";
+        $result = $this->query($sql,[
+            ":password" => $data["password"],
+            ":user"=> $data["user"]
+        ]);
+        if(is_bool($result) && $result == false){
+            return false;
+        }
+        return true;
     }
 }

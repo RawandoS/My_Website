@@ -8,6 +8,7 @@
         <script src="<?php echo BASE_URL?>/public/assets/js/color-modes.js"></script>
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet" />
         <meta name="theme-color" content="#712cf9" />
+        <link href="<?php echo BASE_URL?>/public/assets/css/sign-in.css" rel="stylesheet">
         <link href="headers.css" rel="stylesheet" />
         <style>
             .bd-placeholder-img {
@@ -89,16 +90,44 @@
             </a>
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/coverShow" class="nav-link" aria-current="page">AlbumCovers</a></li>
-                <li class="nav-item"><a href="<?php echo BASE_URL?>/main" class="nav-link active">Main Page</a></li>
+                <li class="nav-item"><a href="<?php echo BASE_URL?>/main" class="nav-link">Main Page</a></li>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/datatable" class="nav-link">Datatables</a></li>
                 <?php if($_SESSION['isAdmin']): ?>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/admin" class="nav-link">Admin</a></li>
                 <?php endif;?>
-                <li class="nav-item"><a href="<?php echo BASE_URL?>/accountPage" class="nav-link">AccountPage</a></li>
+                <li class="nav-item"><a href="<?php echo BASE_URL?>/accountPage" class="nav-link active">AccountPage</a></li>
             </ul>
         </header>
-        <main>
-            
+        <main class="form-signin w-100 m-auto">
+            <form method="post">
+
+                <?php if(!empty($errors)):?>
+                    <div class="alert alert-danger">
+                        <?php echo implode("<br>", $errors)?>
+                    </div>
+                <?php endif;?>
+
+                <h1 class="h3 mb-3 fw-normal">Update password</h1>
+                <div class="form-floating">
+                    <input minlength="8" name="oldPassword" type="password" class="form-control" id="floatingpassword" placeholder="Password">
+                    <label for="floatingPassword">Old Password</label>
+                </div>
+                <div class="form-floating">
+                    <input minlength="8" name="newPassword" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">New Password</label> 
+                </div>
+                <div class="form-floating">
+                    <input minlength="8" name="newConfirmPassword" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Confirm New Password</label> 
+                </div>
+                <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button> 
+                <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2025</p>
+            </form>
+            <hr class="my-4" />
+            <form method="post">
+                <button class="btn btn-primary w-100 py-2" type="submit">Logout</button>
+                <input type="hidden" name="logout" style="display: none;">
+            </form>
         </main>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">
@@ -107,18 +136,6 @@
                 </a>
                 <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2025 Company, Inc</span>
             </div>
-            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3">
-                    <a class="text-body-secondary" href="#" aria-label="Instagram">
-                        <svg class="bi" width="24" height="24" aria-hidden="true"><use xlink:href="#instagram"></use></svg>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="text-body-secondary" href="#" aria-label="Facebook">
-                        <svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg>
-                    </a>
-                </li>
-            </ul>
         </footer>
     </body>
 </html>

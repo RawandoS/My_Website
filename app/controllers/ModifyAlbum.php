@@ -9,6 +9,9 @@ class ModifyAlbum{
 
             redirect('home');
         }
+        if (!isset($_SESSION['isLoggedIn'])){
+            redirect('login');
+        }
         if(!isset($_SESSION['isFromHome'])){
             redirect('home');
         }
@@ -40,11 +43,14 @@ class ModifyAlbum{
                     }
                 }
                 if ($_SESSION["isFromHome"] === true){
+                    unset($_SESSION["albumData"]);
                     redirect("datatable");
                 }elseif ($_SESSION["isFromHome"] === false){
+                    unset($_SESSION["albumData"]);
                     redirect("coverShow");
                 }else{
                     echo '<script>alert("Where did you come from")</script>';
+                    unset($_SESSION["albumData"]);
                     redirect('main');
                 }
             }else{
@@ -75,11 +81,14 @@ class ModifyAlbum{
                     }
                     
                     if ($_SESSION["isFromHome"] === true){
+                        unset($_SESSION["albumData"]);
                         redirect("datatable");
                     }elseif ($_SESSION["isFromHome"] === false){
+                        unset($_SESSION["albumData"]);
                         redirect("coverShow");
                     }else{
                         echo '<script>alert("Where did you come from")</script>';
+                        unset($_SESSION["albumData"]);
                         redirect('main');
                     }
                 }

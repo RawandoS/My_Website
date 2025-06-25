@@ -3,9 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
         <title>Register</title>
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
+
         <script src="<?php echo BASE_URL?>/public/assets/js/color-modes.js"></script>
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet">
         <meta name="theme-color" content="#712cf9">
@@ -82,11 +81,11 @@
 
                 <h1 class="h3 mb-3 fw-normal">Please Register</h1>
                 <div class="form-floating">
-                    <input name="user" type="text" class="form-control" id="floatingInput" placeholder="John smith">
+                    <input minlength="4" name="user" type="text" class="form-control" id="floatingInput" placeholder="John smith">
                     <label for="floatingInput">Username</label>
                 </div>
                 <div class="form-floating">
-                    <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input minlength="8" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Password</label> 
                 </div>
                 <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button> 

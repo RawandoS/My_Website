@@ -9,6 +9,9 @@ class Datatable{
 
             redirect('home');
         }
+        if (!isset($_SESSION['isLoggedIn'])){
+            redirect('login');
+        }
 
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset( $_POST["row"] )) {
             $row = json_decode($_POST["row"], true);

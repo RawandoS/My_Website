@@ -3,12 +3,16 @@
 class Register{
     use Controller;
     public function index(){
-        if(isset($_SESSION) && $_SESSION['isLoggedIn'] === true){
+        if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true){
             redirect('home');
         }
         $user = new User();
-        if($user->validate($_POST))
-        {   
+        if($user->validate($_POST)){
+            $_POST['username'] = trim(filter_input(INPUT_POST,'username',
+                                FILTER_SANITIZE_SPECIAL_CHARS));
+            $_POST['password'] = trim(filter_input(INPUT_POST,'password',
+                                FILTER_SANITIZE_SPECIAL_CHARS));
+            
             $_POST['iconPath'] = "icons/".$_POST['user'].".jpg";
             $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $user = $user->register($_POST);
@@ -17,7 +21,6 @@ class Register{
         }
         
         $data['errors'] = $user->errors;
-
         $this->view('register', $data);
     }
 }

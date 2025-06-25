@@ -84,9 +84,10 @@
                 </div>
             </header>
             <main class="px-3">
-                <h1>Cover your page.</h1>
-                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-                <p class="lead"> <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a> </p>
+                <?php $username = (isset($_SESSION['user']))? "{$_SESSION['user']}" : "user";?>
+                <h1>Hi <?php echo $username?>.</h1>
+                <p class="lead">This is my website, whew you can see, add or search your favourite album.</p>
+                <p class="lead"> <a href="<?php echo BASE_URL?>/main" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a> </p>
             </main>
             <footer class="mt-auto text-white-50">
                 
