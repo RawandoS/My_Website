@@ -1,3 +1,2 @@
 #covers
-public\assets\images\covers\*
-public\assets\images\covers
+public/assets/images/covers/*
