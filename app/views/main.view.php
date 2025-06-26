@@ -8,7 +8,8 @@
         <script src="<?php echo BASE_URL?>/public/assets/js/color-modes.js"></script>
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet" />
         <meta name="theme-color" content="#712cf9" />
-        <link href="headers.css" rel="stylesheet" />
+        <link href="<?php echo BASE_URL?>/public/assets/css/headers.css" rel="stylesheet" />
+        <link href="<?php echo BASE_URL?>/public/assets/css/suggestion.css" rel="stylesheet" />
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -97,8 +98,26 @@
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/accountPage" class="nav-link">AccountPage</a></li>
             </ul>
         </header>
-        <main>
-            <h1><?php echo $_SESSION['user']?></h1>
+        <main class="container mt-4">
+            <h1 class="text-center mb-4">Hello <?php echo $_SESSION['user']?></h1>
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-4">Suggestion Box</h2>
+                            <form action="" method="post">
+                                <div class="mb-3">
+                                    <label for="suggestion" class="form-label">Make a suggestion to the Admins:</label>
+                                    <input type="text" class="form-control" id="suggestion" name="suggestion" placeholder="Enter your suggestion here...">
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" name="submit" class="btn btn-primary">Send to Admins</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">

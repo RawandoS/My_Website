@@ -29,3 +29,8 @@ function arrayContainsSameValues($array1, $array2): bool {
         return false;
     }
 }
+
+function customAlert($message): void {
+    ?> <script>alert("<?php echo $message; ?>")</script>
+    <?php die(); 
+}

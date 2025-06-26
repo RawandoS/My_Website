@@ -98,12 +98,25 @@
                 height: auto;
                 margin: auto;
             }
+            .flex-grow-1 {
+                flex: 1 1 auto;
+            }
+            .form-narrow {
+                max-width: 500px;
+                width: 100%;
+            }
+            .content-center {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-height: calc(100vh - 112px);
+            }
         </style>
     </head>
     <body>
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi me-2" width="40" height="32" aria-hidden="true"><use xlink:href="#bootstrap"></use></svg> <span class="fs-4">My Website</span>
+                <span class="fs-4">My Website</span>
             </a>
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/coverShow" class="nav-link" aria-current="page">AlbumCovers</a></li>
@@ -120,9 +133,9 @@
                 <img class="d-block mx-auto mb-4" src="http://localhost/public/assets/images/defaultVinyl.png" alt="" width="64" height="64" />
                 <h1 class="h2">Modify Album</h1>
             </div>
-            <div class="row">
-                <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3">Album values</h4>
+            <div class="row ">
+                <div class="col-md-7 col-lg-8 text-center">
+                    <h4 class="mb-3 ">Album values</h4>
                     <form class="needs-validation" method="post" enctype="multipart/form-data">
                         <div class="row g-3">
                             <div class="col-sm-6">
