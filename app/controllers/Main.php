@@ -22,6 +22,7 @@ class Main{
             $suggestion = new Suggestion();
 
             $check = $suggestion->addSuggestion( $data);
+            //TODO better error handling
             if (!$check) {
                 $this->announcement = "Suggestion not added";
                 unset($_POST);

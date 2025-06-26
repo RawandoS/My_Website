@@ -3,9 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-        <meta name="generator" content="Astro v5.9.2">
+        
         <title>Home</title>
         <script src="<?php echo BASE_URL?>/public/assets/js/color-modes.js"></script>
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet">

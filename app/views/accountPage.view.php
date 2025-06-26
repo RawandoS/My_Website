@@ -9,7 +9,7 @@
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet" />
         <meta name="theme-color" content="#712cf9" />
         <link href="<?php echo BASE_URL?>/public/assets/css/sign-in.css" rel="stylesheet">
-        <link href="headers.css" rel="stylesheet" />
+        <link href="<?php echo BASE_URL?>/public/assets/css/headers.css" rel="stylesheet" />
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;

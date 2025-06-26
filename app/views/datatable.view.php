@@ -7,10 +7,9 @@
 
         <script src="<?php echo BASE_URL?>/public/assets/js/color-modes.js"></script>
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="CSS/style.css" media="screen">
         <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css">
         <meta name="theme-color" content="#712cf9" />
-        <link href="headers.css" rel="stylesheet" />
+        <link href="<?php echo BASE_URL?>/public/assets/css/headers.css" rel="stylesheet" />
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;

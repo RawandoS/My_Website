@@ -15,10 +15,21 @@ class Suggestion{
         return true;
     }
 
-    public function deleteSuggestion($id, $id_column = "id"){
+    public function selectFrom() {
+        $sql = "SELECT * FROM $this->table LIMIT 12";
+        $result = $this->query($sql);
+        if(is_bool($result) && $result == false){
+            return false;
+        }
+        return $result;
+    }
+
+    public function deleteSuggestion($data = []){
         $sql = "DELETE FROM suggestions 
-                    WHERE id = ?";
-        $result = $this->query($sql,$id);
+                    WHERE id = :id";
+        $result = $this->query($sql, [
+            ":id"=> $data["id"]
+        ]);
         if(is_bool($result) && $result == false){
             return false;
         }

@@ -8,8 +8,8 @@
         <script src="<?php echo BASE_URL?>/public/assets/js/color-modes.js"></script>
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet" />
         <meta name="theme-color" content="#712cf9" />
-        <link href="headers.css" rel="stylesheet" />
-        <link href="sidebars.css" rel="stylesheet" />
+        <link href="<?php echo BASE_URL?>/public/assets/css/headers.css" rel="stylesheet" />
+        <link href="<?php echo BASE_URL?>/public/assets/css/sidebars.css" rel="stylesheet" />
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -129,7 +129,29 @@
                 
             </div>
             <div class="flex-grow-1 p-4">
-                
+                <div class="container">
+                    <h3 class="mb-4">User Suggestions</h3>
+                    <div class="row g-3 suggestionDiv">
+                        <?php foreach($data as $row):
+                            if (is_int(key($row))): continue;
+                            endif ?>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body d-flex flex-column suggestion">
+                                        <p class="card-text flex-grow-1"><strong><?= htmlspecialchars($row["suggestion"]) ?></strong></p>
+                                        <input type="hidden" name="id" value="<?= $row["id"] ?>">
+                                        <button type="button" class="btn btn-outline-danger deleteBtn align-self-end">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                        <?php if(!empty($errors) && $_SERVER['REQUEST_METHOD'] == "POST"):?>
+                            <div class="alert alert-danger">
+                                <?php echo implode("<br>", $errors)?>
+                            </div>
+                        <?php endif;?>
+                    </div>
+                </div>
             </div>
         </main>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -152,5 +174,7 @@
                 </li>
             </ul>
         </footer>
+        <script src="<?php echo BASE_URL?>/public/assets/js/suggestion.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </body>
 </html>

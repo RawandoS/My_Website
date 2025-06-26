@@ -8,8 +8,8 @@
         <script src="<?php echo BASE_URL?>/public/assets/js/color-modes.js"></script>
         <link href="<?php echo BASE_URL?>/public/assets/css/bootstrap.min.css" rel="stylesheet" />
         <meta name="theme-color" content="#712cf9" />
-        <link href="headers.css" rel="stylesheet" />
-        <link href="checkout.css" rel="stylesheet" />
+        <link href="<?php echo BASE_URL?>/public/assets/css/headers.css" rel="stylesheet" />
+        <link href="<?php echo BASE_URL?>/public/assets/css/checkout.css" rel="stylesheet" />
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -123,7 +123,7 @@
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/main" class="nav-link active">Main Page</a></li>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/datatable" class="nav-link">Datatables</a></li>
                 <?php if($_SESSION['isAdmin']): ?>
-                <li class="nav-item"><a href="<?php echo BASE_URL?>/admin" class="nav-link">Admin</a></li>
+                <li class="nav-item"><a href="<?php echo BASE_URL?>/adminDatabase" class="nav-link">Admin</a></li>
                 <?php endif;?>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/accountPage" class="nav-link">ModifyAlbum</a></li>
             </ul>
@@ -133,7 +133,7 @@
                 <img class="d-block mx-auto mb-4" src="http://localhost/public/assets/images/defaultVinyl.png" alt="" width="64" height="64" />
                 <h1 class="h2">Modify Album</h1>
             </div>
-            <div class="row ">
+            <div class="row mx-auto">
                 <div class="col-md-7 col-lg-8 text-center">
                     <h4 class="mb-3 ">Album values</h4>
                     <form class="needs-validation" method="post" enctype="multipart/form-data">
