@@ -135,12 +135,13 @@
                         <?php foreach($data as $row):
                             if (is_int(key($row))): continue;
                             endif ?>
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-4 suggestion">
                                 <div class="card h-100 shadow-sm">
-                                    <div class="card-body d-flex flex-column suggestion">
+                                    <div class="card-body d-flex flex-column">
                                         <p class="card-text flex-grow-1"><strong><?= htmlspecialchars($row["suggestion"]) ?></strong></p>
                                         <input type="hidden" name="id" value="<?= $row["id"] ?>">
-                                        <button type="button" class="btn btn-outline-danger deleteBtn align-self-end">Delete</button>
+                                        <input type="hidden" name="suggestionName" value="<?= $row["suggestion"] ?>">
+                                        <button type="button" class="btn btn-outline-danger deleteBtn align-self-end">Add to Database</button>
                                     </div>
                                 </div>
                             </div>

@@ -14,6 +14,13 @@ function redirect($path): void    {
     header("Location:".BASE_URL."/".$path);
 }
 
+function redirectMessage($path,$message): void {
+    echo "<script>
+        window.location.href='".BASE_URL."/".$path."';
+        alert('".$message."');
+    </script>";
+}
+
 /**
  * Return true if the interesction of the two arrays is equal to the first array,
  * if not it returns false
