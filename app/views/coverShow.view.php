@@ -81,6 +81,55 @@
             .bd-mode-toggle .dropdown-menu .active .bi {
                 display: block !important;
             }
+            
+            /* Pagination styling with the purple theme */
+            .pagination {
+                display: flex;
+                justify-content: center;
+                margin: 2rem 0;
+                gap: 0.5rem;
+            }
+            
+            .pagination a {
+                color: #712cf9;
+                padding: 0.5rem 1rem;
+                text-decoration: none;
+                border: 1px solid #712cf9;
+                border-radius: 0.25rem;
+                transition: all 0.3s ease;
+            }
+            
+            .pagination a:hover {
+                background-color: #712cf9;
+                color: white;
+            }
+            
+            .pagination .pageNumbers {
+                display: flex;
+                gap: 0.5rem;
+            }
+            
+            .pagination .pageNumbers a {
+                min-width: 2.5rem;
+                text-align: center;
+            }
+            
+            .pagination a[href] {
+                cursor: pointer;
+            }
+            
+            .pagination a:not([href]) {
+                color: #6c757d;
+                border-color: #dee2e6;
+                pointer-events: none;
+            }
+            
+            /* Active page indicator */
+            .pagination .pageNumbers a[href*="pageNum=<?php echo isset($_GET['pageNum']) ? $_GET['pageNum'] : '1'; ?>"] {
+                background-color: #712cf9;
+                color: white;
+                font-weight: bold;
+            }
         </style>
     </head>
     <?php
@@ -155,7 +204,7 @@
                 
                 <?php
                     if(isset($_GET["pageNum"]) && $_GET["pageNum"] > 1){
-                        echo "<a href=\"?pageNum=".($_GET["pageNum"] - 1)."\">Previus</a>";
+                        echo "<a href=\"?pageNum=".($_GET["pageNum"] - 1)."\">Previous</a>";
                     } else{
                         echo "<a>Previous</a>";
                     }

@@ -3,7 +3,7 @@
 class Logout{
     use Controller;
     public function index(){
-        $_SESSION['username'] = "";
+        unset($_SESSION["user"]);
         $_SESSION['isLoggedIn'] = false;
         session_destroy();
 

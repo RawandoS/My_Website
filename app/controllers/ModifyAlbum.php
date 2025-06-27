@@ -64,7 +64,7 @@ class ModifyAlbum{
                     unset($_POST);
                     redirect('modifyAlbum');
                 }
-                if ($uploadFile["size"] > 500000) {
+                if ($uploadFile["size"] > 100000) {
                     echo '<script>alert("File is too large")</script>';
                     unset($_POST);
                     redirect('modifyAlbum');

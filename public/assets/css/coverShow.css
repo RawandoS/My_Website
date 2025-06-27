@@ -39,7 +39,7 @@
 }
 
 .album{
-  background: linear-gradient(135deg, #eeb78c, #ecc3a4);
+  background: linear-gradient(135deg, #25c3c3, #6079c2);
   border-radius: 15px;
   padding: 25px;
   display: flex;
@@ -48,7 +48,7 @@
   gap: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid #6c3f0c;
+  border: 2px solid #2a0467;
 }
 
 .album:hover {
@@ -59,7 +59,7 @@
 .album h1 {
   margin: 0;
   font-size: 1.5em;
-  color: #4f2d06;
+  color: #000000;
   text-align: center;
   word-break: break-word;
 }
