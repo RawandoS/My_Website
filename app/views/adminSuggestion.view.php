@@ -88,6 +88,9 @@
             .flex-grow-1 {
                 flex: 1 1 auto;
             }
+            .active{
+                background: linear-gradient(135deg, #25c3c3, #6079c2);
+            }
         </style>
     </head>
     <body>

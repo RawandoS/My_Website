@@ -37,6 +37,9 @@
                 max-width: 800px;
                 margin: 0 auto;
             }
+            .active{
+                background: linear-gradient(135deg, #25c3c3, #6079c2);
+            }
         </style>
     </head>
     <body>

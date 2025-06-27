@@ -86,8 +86,8 @@ class User{
     /**
      * This function updates the account record in the database,
      * changing the username, gender, birth date and biography,
-     * searching it using the old name; it returns true if the 
-     * update was succesfull, else it returns false
+     * searching it using the old name; it returns `true` if the 
+     * update was succesfull, else it returns `false`
      * @param array $data
      * @return bool
      */

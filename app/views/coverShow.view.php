@@ -124,11 +124,13 @@
                 pointer-events: none;
             }
             
-            /* Active page indicator */
             .pagination .pageNumbers a[href*="pageNum=<?php echo isset($_GET['pageNum']) ? $_GET['pageNum'] : '1'; ?>"] {
                 background-color: #712cf9;
                 color: white;
                 font-weight: bold;
+            }
+            .active{
+                background: linear-gradient(135deg, #25c3c3, #6079c2);
             }
         </style>
     </head>

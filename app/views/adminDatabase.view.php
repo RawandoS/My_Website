@@ -99,6 +99,9 @@
                 justify-content: center;
                 min-height: calc(100vh - 112px);
             }
+            .active{
+                background: linear-gradient(135deg, #25c3c3, #6079c2);
+            }
         </style>
     </head>
     <body>

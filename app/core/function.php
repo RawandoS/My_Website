@@ -23,8 +23,8 @@ function redirectMessage($path,$message): void {
 }
 
 /**
- * Return true if the interesction of the two arrays is equal to the first array,
- * if not it returns false
+ * Return `true` if the interesction of the two arrays is equal to the first array,
+ * if not it returns `false`
  * @param array $array1
  * @param array $array2
  * @return bool
