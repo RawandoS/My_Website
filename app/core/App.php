@@ -25,7 +25,7 @@ class App{
             
             call_user_func_array([$controller, $this->method], []);
         }else{
-            $filename = ROOT."./app/controllers/_404.php";
+            $filename = ROOT."/app/controllers/_404.php";
             require $filename;
             $this->controller = "_404";
             $controller = new $this->controller;

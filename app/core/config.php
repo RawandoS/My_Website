@@ -22,6 +22,6 @@ if ($_SERVER['SERVER_NAME'] == "localhost"){
 define("APP_NAME","My_Website");
 
 /**
- * if true error are shown, if false errors aren't shown
+ * If set true error are shown, if set false errors aren't shown
  */
 define("DEBUG",true);
