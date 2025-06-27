@@ -7,7 +7,10 @@ define('TOKENDISCOGS', $token->getToken());
 
 
 /**
- * Summary of getAlbum
+ * When given a keyword it seraches for it in the discogs API, and from the first
+ * result it gets the album id, which it uses to get the json of the album, which is 
+ * then returned as an array; if no id is found or if the release was removed / never existed
+ * it returns flase
  * @param mixed $keyword
  */
 function getAlbum($keyword){
@@ -48,12 +51,14 @@ function getAlbum($keyword){
 }
 
 /**
- * Summary of prepareAlbumData
- * @param mixed $album
+ * The full album array sent to the function is formatted to be then returned as an array
+ * to give to the query; if the array in input is not an array or it's empty an empty 
+ * array is returned
+ * @param array $album
  * @return array
  */
 function prepareAlbumData($album){
-    if(!is_array($album)){
+    if(!is_array($album || empty($album))){
         $album = [];
         return $album;
     }

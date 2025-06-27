@@ -74,12 +74,20 @@
         <main class="form-signin w-100 m-auto">
             <form method="post">
                 <h1 class="h3 mb-3 fw-normal">Please login</h1>
+                <?php 
+                    $username = $password = "";
+                    if(!empty($data["login"])) {
+                        $username = $data["login"]["username"];
+                        $password = $data["login"]["password"];
+                        unset($_SESSION["login"]);
+                    }
+                ?>
                 <div class="form-floating">
-                    <input minlength="4" name="user" type="text" class="form-control" id="floatingInput" placeholder="John smith">
+                    <input minlength="4" name="user" type="text" class="form-control" id="floatingInput" value="<?php echo $username ?>" placeholder="John smith">
                     <label for="floatingInput">Username</label>
                 </div>
                 <div class="form-floating">
-                    <input minlength="8" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input minlength="8" name="password" type="password" class="form-control" id="floatingPassword" value="<?php echo $password ?>" placeholder="Password">
                     <label for="floatingPassword">Password</label> 
                 </div>
                 <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button> 

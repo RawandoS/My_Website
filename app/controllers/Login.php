@@ -28,8 +28,11 @@ class Login{
             }
             
         }
-        
 
-        $this->view('login');
+        $data = [];
+        if(isset($_SESSION["login"])){
+            $data["login"] = $_SESSION["login"];
+        }
+        $this->view('login', $data);
     }
 }

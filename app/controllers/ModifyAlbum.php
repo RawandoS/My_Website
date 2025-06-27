@@ -15,6 +15,9 @@ class ModifyAlbum{
         if(!isset($_SESSION['isFromHome'])){
             redirect('home');
         }
+        if(!isset($_SESSION['albumData'])){
+            redirectMessage('main', "You need to chose an album");
+        }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $targetFile = ROOT."/public/assets/images/covers/".$_POST["title"].".jpg";
@@ -76,7 +79,7 @@ class ModifyAlbum{
                     if($Update){
                         $check = $album->updateAlbumValues($row);
                         if (!$check){
-                            echo '<script>alert("Database was not updated")</script>';
+                            redirectMessage('modifyAlbum', "Database was not updated");
                         }
                     }
                     

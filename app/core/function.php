@@ -15,6 +15,7 @@ function redirect($path): void    {
 }
 
 function redirectMessage($path,$message): void {
+    $message = str_replace("'","\'",$message);
     echo "<script>
         window.location.href='".BASE_URL."/".$path."';
         alert('".$message."');
@@ -34,6 +35,25 @@ function arrayContainsSameValues($array1, $array2): bool {
         return true;
     }else{
         return false;
+    }
+}
+
+function checkSession (){
+    if(isset($_SESSION["canLog"]) && $_SESSION['canLog'] === false){
+        $_SESSION['username'] = "";
+        $_SESSION['isLoggedIn'] = false;
+
+        redirectMessage('home',"You can't log to the server");
+    }
+    if (!isset($_SESSION['isLoggedIn'])){
+        redirectMessage('login',"You aren't logged to the server");
+    }
+}
+
+function checkSessionAdmin(){
+    checkSession();
+    if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
+        redirectMessage('login', "You're not an administrator");
     }
 }
 

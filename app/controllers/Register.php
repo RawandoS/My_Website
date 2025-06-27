@@ -7,17 +7,22 @@ class Register{
             redirect('home');
         }
         $user = new User();
-        if($user->validate($_POST)){
+        if($_SERVER['REQUEST_METHOD'] === "POST" && $user->validate($_POST)){
             $_POST['username'] = trim(filter_input(INPUT_POST,'username',
                                 FILTER_SANITIZE_SPECIAL_CHARS));
             $_POST['password'] = trim(filter_input(INPUT_POST,'password',
                                 FILTER_SANITIZE_SPECIAL_CHARS));
+            $password = $_POST['password'];
             
             $_POST['iconPath'] = "http://localhost/public/assets/images/accountIcons/".$_POST['user'].".jpg";
             $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $user = $user->register($_POST);
-            //TODO: error handling
-            redirect("login");
+            show($_POST);
+            $check = $user->register($_POST);
+            if(!$check){
+                redirectMessage('register', "DB error: Your autentication failed");
+            }
+            $_SESSION["login"] = ["username" => $_POST['user'], 'password'=> $password];
+            redirectMessage('login', "Your account has been registered");
         }
         
         $data['errors'] = $user->errors;
