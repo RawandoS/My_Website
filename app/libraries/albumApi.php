@@ -31,7 +31,6 @@ function getAlbum($keyword){
     $data = json_decode($data, true);
     if (!isset($data['results'][0]['id'])) {
         echo "The album id was not found<br>";
-         show($data);
         return false;
     }
    
@@ -62,6 +61,8 @@ function prepareAlbumData($album){
         $album = [];
         return $album;
     }
+
+    //TODO: error when encountering this text \"G\", needs fix
 
     $data = [];
 

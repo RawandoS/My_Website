@@ -49,7 +49,7 @@
             </a>
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/coverShow" class="nav-link">AlbumCovers</a></li>
-                <li class="nav-item"><a href="<?php echo BASE_URL?>/main" class="nav-link active">Main Page</a></li>
+                <li class="nav-item"><a href="<?php echo BASE_URL?>/main" class="nav-link">Main Page</a></li>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/datatable" class="nav-link">Datatables</a></li>
                 <?php if($_SESSION['isAdmin']): ?>
                 <li class="nav-item"><a href="<?php echo BASE_URL?>/adminDatabase" class="nav-link">Admin</a></li>

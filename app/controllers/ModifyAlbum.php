@@ -101,8 +101,11 @@ class ModifyAlbum{
         
         $data = $_SESSION["albumData"];
         $albumCoverPath = str_replace(BASE_URL,ROOT, $data["albumCoverPath"]);
+        $albumCoverPath = preg_replace('/\s+/', '_', $albumCoverPath);
         $data["albumCoverPath"] =  (file_exists($albumCoverPath)) ? $data["albumCoverPath"] : BASE_URL."/public/assets/images/defaultVinyl.png";
-        
+        $data["albumCoverPath"] = preg_replace('/\s+/', '_', $data["albumCoverPath"]);
+
         $this->view('modifyAlbum', $data);
     }
 }
+//http://localhost/public/assets/images/covers/Kid A.jpg
